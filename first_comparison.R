@@ -8,9 +8,9 @@ library(here)
 
 
 # --- Load and filter ---
-my_df <- read.csv("/home/pierre/Projets_R/modality-statistics/spartacus.csv")
+my_df <- read.csv("corrected_confident_data.csv")
 
-gh_frontal_plane_dof_1 <- my_df %>%
+gh_frontal_plane_dof_1 <- my_df
   filter(joint == "glenohumeral",
          humeral_motion == "frontal plane elevation",
          degree_of_freedom == 1,
