@@ -1,0 +1,73 @@
+"joint","motion","dof","n_rows","n_units","n_ex","n_in","st_ex","st_in","mode","rho","level_shift","level_p","diff_p","diff_mean_signed","diff_mean_abs","diff_max_abs","bic","note","diff_p_fdr","level_p_fdr"
+"acromioclavicular","frontal plane elevation",1,18629,14,10,4,1,3,"compare",0.998645370646728,2.44394670909679,0.348979891886315,0,3.50581874725992,3.50581874725992,6.57282330054179,-75776.4196990339,"",0,0.411297729723157
+"acromioclavicular","frontal plane elevation",2,18629,14,10,4,1,3,"compare",0.995529244369127,-12.7018203103799,0.0010487746686194,0,-18.045805916383,18.045805916383,20.7099653561668,-39541.7434939501,"",0,0.00266227415880308
+"acromioclavicular","frontal plane elevation",3,18629,14,10,4,1,3,"compare",0.998352915160694,-6.47062646765552,0.026347500135065,0,-9.11436925220579,9.11436925220579,10.2892249365238,-64935.9006026702,"",0,0.0457614476030076
+"acromioclavicular","horizontal flexion",1,13047,9,9,0,1,0,"single",0.997714284746622,NA,NA,NA,NA,NA,NA,-49371.3112338794,"only: ex vivo",NA,NA
+"acromioclavicular","horizontal flexion",2,13047,9,9,0,1,0,"single",0.99761891871196,NA,NA,NA,NA,NA,NA,-40618.8621559353,"only: ex vivo",NA,NA
+"acromioclavicular","horizontal flexion",3,13047,9,9,0,1,0,"single",0.997973474068245,NA,NA,NA,NA,NA,NA,-42639.2438949958,"only: ex vivo",NA,NA
+"acromioclavicular","internal-external rotation 0 degree-abducted",1,9179,12,10,2,1,1,"single",0.994411394554027,NA,NA,NA,NA,NA,NA,-48117.5995811363,"only: ex vivo+in vivo",NA,NA
+"acromioclavicular","internal-external rotation 0 degree-abducted",2,9179,12,10,2,1,1,"single",0.994186052940802,NA,NA,NA,NA,NA,NA,-40317.5308352748,"only: ex vivo+in vivo",NA,NA
+"acromioclavicular","internal-external rotation 0 degree-abducted",3,9179,12,10,2,1,1,"single",0.996774560101068,NA,NA,NA,NA,NA,NA,-47462.3908642383,"only: ex vivo+in vivo",NA,NA
+"acromioclavicular","internal-external rotation 90 degree-abducted",1,402,2,0,2,0,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"acromioclavicular","internal-external rotation 90 degree-abducted",2,402,2,0,2,0,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"acromioclavicular","internal-external rotation 90 degree-abducted",3,402,2,0,2,0,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"acromioclavicular","sagittal plane elevation",1,19168,13,10,3,1,2,"compare",0.999212726110917,7.98963482529822,0.00462529425087663,0,7.6722258676763,7.6722258676763,8.33630536460336,-78692.9490896253,"",0,0.00953966939243305
+"acromioclavicular","sagittal plane elevation",2,19168,13,10,3,1,2,"compare",0.999009484897142,-15.5206905353127,0.000122007304956922,0,-21.6769824505377,21.6769824505377,29.9492694792984,-66372.1829507966,"",0,0.000335520088631534
+"acromioclavicular","sagittal plane elevation",3,19168,13,10,3,1,2,"compare",0.998773735249911,-6.28039662681841,0.0123135988061176,0,-4.11230174883612,4.11230174883612,6.57251307676366,-64574.6880428516,"",0,0.0225749311445489
+"acromioclavicular","scapular plane elevation",1,32,2,1,1,1,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"acromioclavicular","scapular plane elevation",2,32,2,1,1,1,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"acromioclavicular","scapular plane elevation",3,32,2,1,1,1,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"glenohumeral","frontal plane elevation",1,21560,33,10,23,1,3,"compare",0.979232673005874,1.46978178057052,0.810268502148025,0,0.783532095826093,8.91515547469087,20.8595669946416,47869.6680522247,"",0,0.810268502148025
+"glenohumeral","frontal plane elevation",2,21560,33,10,23,1,3,"compare",0.996183245790512,5.65310877993474,0.00228509294659166,0,10.0217621949363,10.1602648538719,15.2748286876577,-36449.456470658,"",0,0.00502720448250166
+"glenohumeral","frontal plane elevation",3,21560,33,10,23,1,3,"compare",0.972803727812803,-43.4204182136538,8.65669635168429e-11,0,-60.9291613984143,60.9291613984143,74.8734011179636,49177.1407296564,"",0,8.27638888824426e-10
+"glenohumeral","horizontal flexion",1,13047,9,9,0,1,0,"single",0.997767987354966,NA,NA,NA,NA,NA,NA,-20121.0060094264,"only: ex vivo",NA,NA
+"glenohumeral","horizontal flexion",2,13047,9,9,0,1,0,"single",0.998237337599945,NA,NA,NA,NA,NA,NA,-22773.2063945443,"only: ex vivo",NA,NA
+"glenohumeral","horizontal flexion",3,13047,9,9,0,1,0,"single",0.998156615444846,NA,NA,NA,NA,NA,NA,-17931.7846804363,"only: ex vivo",NA,NA
+"glenohumeral","internal-external rotation 0 degree-abducted",1,11438,31,10,21,1,2,"compare",0.970153846695593,42.8524415398267,3.46842085678812e-06,0,63.540778435403,63.540778435403,70.6564461257416,45538.5871777984,"",0,1.63511268962868e-05
+"glenohumeral","internal-external rotation 0 degree-abducted",2,11438,31,10,21,1,2,"compare",0.968271831206215,12.9356972823319,1.33704152862562e-09,0,18.6300503970739,18.6300503970739,21.5424377502796,10813.9241716198,"",0,8.82447408892911e-09
+"glenohumeral","internal-external rotation 0 degree-abducted",3,11438,31,10,21,1,2,"compare",0.955592890400029,48.0065877157741,1.53586688397602e-05,0,70.5579544947586,70.5579544947586,75.7544330856234,50299.0547557481,"",0,5.97840916782308e-05
+"glenohumeral","internal-external rotation 90 degree-abducted",1,2807,22,0,22,0,2,"single",0.981233672503047,NA,NA,NA,NA,NA,NA,2943.72318776425,"only: in vivo",NA,NA
+"glenohumeral","internal-external rotation 90 degree-abducted",2,2807,22,0,22,0,2,"single",0.974634239515503,NA,NA,NA,NA,NA,NA,1214.80146901649,"only: in vivo",NA,NA
+"glenohumeral","internal-external rotation 90 degree-abducted",3,2807,22,0,22,0,2,"single",0.979150778266693,NA,NA,NA,NA,NA,NA,2099.46659341201,"only: in vivo",NA,NA
+"glenohumeral","sagittal plane elevation",1,21680,34,10,24,1,4,"compare",0.991079350479895,11.1497071330324,0.00201166342033802,0,12.5382503110834,13.2295500931498,75.8162260326196,39919.7119754229,"",0,0.00474177806222534
+"glenohumeral","sagittal plane elevation",2,21680,34,10,24,1,4,"compare",0.991446016226255,3.09786762721255,0.0759773246416083,0,4.42091010545801,5.94629299820081,9.10147281897808,5189.8457539274,"",0,0.109010944051003
+"glenohumeral","sagittal plane elevation",3,21680,34,10,24,1,4,"compare",0.991715509986854,-35.0453503778676,5.64001778596953e-15,0,-48.8380261740866,48.8380261740866,105.58562888079,39683.6353690618,"",0,1.86120586936995e-13
+"glenohumeral","scapular plane elevation",1,2831,21,0,21,0,2,"single",0.972343397887828,NA,NA,NA,NA,NA,NA,8041.07581933427,"only: in vivo",NA,NA
+"glenohumeral","scapular plane elevation",2,2831,21,0,21,0,2,"single",0.981050457695339,NA,NA,NA,NA,NA,NA,1485.34703547514,"only: in vivo",NA,NA
+"glenohumeral","scapular plane elevation",3,2831,21,0,21,0,2,"single",0.973621386221124,NA,NA,NA,NA,NA,NA,8396.2693616064,"only: in vivo",NA,NA
+"scapulothoracic","frontal plane elevation",1,22102,44,13,31,4,5,"compare",0.98760470749607,-4.99022799124153,0.0528771383946822,0,-7.07059277959775,7.07059277959775,9.51760962034164,-24783.0620825873,"",0,0.0830926460487864
+"scapulothoracic","frontal plane elevation",2,22102,44,13,31,4,5,"compare",0.995554134393539,-6.41968717116615,1.63047522758811e-05,0,-10.429553316472,10.429553316472,15.0611070357063,-31453.5523024395,"",0,5.97840916782308e-05
+"scapulothoracic","frontal plane elevation",3,22102,44,13,31,4,5,"compare",0.976846877696569,4.92495666543789,0.0559689876220492,0,6.30945189475424,6.30945189475424,10.7120832121149,-22745.963538186,"",0,0.0839534814330738
+"scapulothoracic","horizontal flexion",1,13485,17,10,7,2,1,"compare",0.995959008439931,-10.3931026688222,4.21711899988496e-05,0,-12.8545838347484,12.9939985455421,24.0163439197822,-27927.0547358184,"",0,0.000126513569996549
+"scapulothoracic","horizontal flexion",2,13485,17,10,7,2,1,"compare",0.997570585544586,14.1505982163715,2.26874540597178e-12,0,19.8400561105793,19.8400561105793,21.2858038367476,-29642.7118766674,"",0,3.74342991985344e-11
+"scapulothoracic","horizontal flexion",3,13485,17,10,7,2,1,"compare",0.996268454508517,-10.5428696860458,1.69489880345051e-09,0,-12.5693103038639,12.5693103038639,15.66462338102,-50272.4606796684,"",0,9.3219434189778e-09
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,11438,31,10,21,1,2,"compare",0.931097089074817,-3.22049231520334,0.0900569279079624,0,-5.7976887698419,6.69300079142501,14.5499846980115,13275.0554869545,"",0,0.123828275873448
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,11438,31,10,21,1,2,"compare",0.97451531002304,-7.23820739125693,3.57296448833161e-05,0.134162563584043,-10.4286743210971,10.4286743210971,10.7356576817363,-8677.50728698412,"",0.134162563584043,0.000117907828114943
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,11438,31,10,21,1,2,"compare",0.954528214691137,-3.97121862520618,0.0310904446213375,1.72041912680498e-05,-5.86639137347372,5.86639137347372,6.34134562699614,-9034.06190141303,"",1.77418222451764e-05,0.0512992336252069
+"scapulothoracic","internal-external rotation 90 degree-abducted",1,2833,24,0,24,0,4,"single",0.972455459819408,NA,NA,NA,NA,NA,NA,2.27220364251434,"only: in vivo",NA,NA
+"scapulothoracic","internal-external rotation 90 degree-abducted",2,2833,24,0,24,0,4,"single",0.968789250594614,NA,NA,NA,NA,NA,NA,-107.693312655246,"only: in vivo",NA,NA
+"scapulothoracic","internal-external rotation 90 degree-abducted",3,2833,24,0,24,0,4,"single",0.967974220683616,NA,NA,NA,NA,NA,NA,-70.3345323222045,"only: in vivo",NA,NA
+"scapulothoracic","sagittal plane elevation",1,21807,38,13,25,4,5,"compare",0.993216124507094,3.94253833407297,0.125684478768195,0,5.10118525183853,5.10118525183853,9.31232739294738,-23889.7424328742,"",0,0.156152715844191
+"scapulothoracic","sagittal plane elevation",2,21807,38,13,25,4,5,"compare",0.995577938627456,-5.35365811686228,0.00743034678426803,0,-8.59667780802937,8.61655778155651,14.1713522317927,-32971.3879972289,"",0,0.0144236143459321
+"scapulothoracic","sagittal plane elevation",3,21807,38,13,25,4,5,"compare",0.986839106247066,0.831349561859563,0.590826556268236,0,0.531948261449524,2.28679490882398,6.48376024096526,-30498.972889831,"",0,0.609289886151618
+"scapulothoracic","scapular plane elevation",1,3161,51,2,49,2,7,"single",0.923536621166563,NA,NA,NA,NA,NA,NA,6753.28536286842,"only: ex vivo+in vivo",NA,NA
+"scapulothoracic","scapular plane elevation",2,3161,51,2,49,2,7,"single",0.926139389687145,NA,NA,NA,NA,NA,NA,5028.09488688874,"only: ex vivo+in vivo",NA,NA
+"scapulothoracic","scapular plane elevation",3,3161,51,2,49,2,7,"single",0.908063401473401,NA,NA,NA,NA,NA,NA,6494.49812437557,"only: ex vivo+in vivo",NA,NA
+"sternoclavicular","frontal plane elevation",1,18816,17,13,4,4,3,"compare",0.997742178442513,-1.70223306305901,0.502782538684549,0,-2.2537316940364,2.2537316940364,3.42221445931994,-59590.6242479454,"",0,0.535220121825487
+"sternoclavicular","frontal plane elevation",2,18816,17,13,4,4,3,"compare",0.996754167055017,-2.54680876372481,0.381470116860912,0,-2.47397801829232,4.95221111873251,7.53176765079909,-50473.8302283158,"",0,0.434086684703797
+"sternoclavicular","frontal plane elevation",3,18816,17,13,4,4,3,"compare",0.995073370839672,8.73677979625653,0.108539264471174,0,12.8013416719194,12.8013416719194,18.8111845499807,-45097.1112320111,"",0,0.14327182910195
+"sternoclavicular","horizontal flexion",1,13064,10,10,0,2,0,"single",0.997797247596606,NA,NA,NA,NA,NA,NA,-40298.1078594446,"only: ex vivo",NA,NA
+"sternoclavicular","horizontal flexion",2,13064,10,10,0,2,0,"single",0.997728100881298,NA,NA,NA,NA,NA,NA,-41046.7616956891,"only: ex vivo",NA,NA
+"sternoclavicular","horizontal flexion",3,13064,10,10,0,2,0,"single",0.997786050028492,NA,NA,NA,NA,NA,NA,-57974.8179631059,"only: ex vivo",NA,NA
+"sternoclavicular","internal-external rotation 0 degree-abducted",1,9179,12,10,2,1,1,"single",0.996462032248911,NA,NA,NA,NA,NA,NA,-35464.3245700499,"only: ex vivo+in vivo",NA,NA
+"sternoclavicular","internal-external rotation 0 degree-abducted",2,9179,12,10,2,1,1,"single",0.996484180645036,NA,NA,NA,NA,NA,NA,-53779.8778530757,"only: ex vivo+in vivo",NA,NA
+"sternoclavicular","internal-external rotation 0 degree-abducted",3,9179,12,10,2,1,1,"single",0.995672840998182,NA,NA,NA,NA,NA,NA,-46098.7778529803,"only: ex vivo+in vivo",NA,NA
+"sternoclavicular","internal-external rotation 90 degree-abducted",1,402,2,0,2,0,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"sternoclavicular","internal-external rotation 90 degree-abducted",2,402,2,0,2,0,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"sternoclavicular","internal-external rotation 90 degree-abducted",3,402,2,0,2,0,1,"skip",NA,NA,NA,NA,NA,NA,NA,NA,"too few units",NA,NA
+"sternoclavicular","sagittal plane elevation",1,19360,16,13,3,4,2,"compare",0.997654790583774,3.14528856444223,0.411446013329537,0,5.14149234825355,5.14149234825355,7.59103066426627,-61619.0384278336,"",0,0.452590614662491
+"sternoclavicular","sagittal plane elevation",2,19360,16,13,3,4,2,"compare",0.997967830815542,28.6959278750555,1.00319865312052e-10,0,-6.63741267987393,6.63741267987393,8.58927258824951,-63104.9480220607,"",0,8.27638888824426e-10
+"sternoclavicular","sagittal plane elevation",3,19360,16,13,3,4,2,"compare",0.997765423516145,9.19726375142429,0.127761312963429,0,10.8806764697772,10.8806764697772,17.8954763149938,-58834.5465518806,"",0,0.156152715844191
+"sternoclavicular","scapular plane elevation",1,280,26,1,25,1,2,"single",0.811395775593805,NA,NA,NA,NA,NA,NA,1222.28919832567,"only: ex vivo+in vivo",NA,NA
+"sternoclavicular","scapular plane elevation",2,280,26,1,25,1,2,"single",0.728379778530806,NA,NA,NA,NA,NA,NA,977.292750405678,"only: ex vivo+in vivo",NA,NA
+"sternoclavicular","scapular plane elevation",3,280,26,1,25,1,2,"single",0.713770236268761,NA,NA,NA,NA,NA,NA,1004.41313826875,"only: ex vivo+in vivo",NA,NA
