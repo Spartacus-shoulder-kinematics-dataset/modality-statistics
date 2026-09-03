@@ -1,0 +1,31 @@
+Scapulothoracic rhythm — in vivo vs ex vivo — R analysis digest
+================================================================
+
+Data: 22102 obs, 44 units. lag-1 residual autocorrelation = 0.996.
+
+WINNING MODEL: spline mixed model (mgcv) with AR(1) residuals
+  Y ~ condO + s(TIME) + s(TIME, by=condO) + s(ID, bs='re')
+
+Smooth terms (AR(1)-corrected, honest inference):
+                         edf  Ref.df         F p-value
+s(TIME)               8.0628  8.4160 1939.6651       0
+s(TIME):condOin vivo  8.4974  8.7006  368.4004       0
+s(ID)                40.9333 42.0000   54.1142       0
+
+Parametric terms (AR(1)):
+            Estimate Std. Error  t value Pr(>|t|)
+(Intercept) -26.4030     1.0529 -25.0759        0
+condO.L      -6.4197     1.4891  -4.3112        0
+
+HOW TO READ IT:
+ * s(TIME):condOin vivo -> DIFFERENCE in trajectory SHAPE (small p = differ).
+ * condO.L              -> constant LEVEL shift between conditions.
+ * figure 02 shows the total difference (with 95% CI) across elevation:
+   where the band excludes 0, the conditions differ at that elevation.
+
+BIC: spline+AR1 = -31454 | spline naive = 111037 | sigmoid NLME = 125717
+
+CAVEATS: (1) values labelled 'rad' look like degrees - verify provenance.
+ (2) 44 units, heavily imbalanced dense ex-vivo curves - between-study
+     variance modest to estimate; interpret cautiously.
+ (3) AR(1) handles within-curve autocorrelation approximately.

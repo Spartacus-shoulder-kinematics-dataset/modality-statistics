@@ -39,13 +39,22 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
-docs/
-
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
 
+# Data — never commit. See README.md "Data" for how to download / regenerate.
 spartacus.csv
+corrected_confident_data.csv
+spartacus_angles_long.csv
+monolix_st_frontal_dof2.csv
+
+spartacus_angles_long.csv
+
+.idea/
+
+monolix_st_frontal_dof2.csv
+
+article/

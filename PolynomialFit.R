@@ -7,7 +7,7 @@ library(dplyr)
 library(ggplot2)
 
 # --- Lecture & filtrage ---
-df <- read.csv("C:/Users/Florent/OneDrive - Université de Genève/_ETUDES/Shoulder_ex_in_vivo/spartacus.csv", stringsAsFactors = FALSE)
+df <- read.csv("corrected_confident_data.csv", stringsAsFactors = FALSE)
 
 st <- df %>%
   filter(
@@ -35,10 +35,10 @@ st_grouped <- st %>%
     .groups = "drop"
   ) %>%
   mutate(
-    se = sd_angle / sqrt(pman, 1)),
+    se = sd_angle / sqrt(pmax(n, 1)),
     # Choix des poids — par défaut: poids = n (stable).
     # Alternative (plus théorique) = 1/(se^2 + eps).
-    w  = pman, 1),
+    w  = pmax(n, 1),
     # w = 1 / (se^2 + 1e-8)
   )
 
@@ -98,7 +98,7 @@ fit_group_poly <- function(data, group_name) {
     ))
     
     # Courbe prédite (uniquement sur le domaine observé du groupe)
-    x_pred <- seq(min(data$x), madata$x), length.out = 200)
+    x_pred <- seq(min(data$x), max(data$x), length.out = 200)
     pred_df <- data.frame(x = x_pred)
     pred_df$y_pred <- predict(mod, newdata = pred_df)
     
