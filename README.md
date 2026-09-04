@@ -156,6 +156,16 @@ hand-written [`figures/README.md`](figures/README.md) — keep that file if you 
 
 ## The model
 
+A generalized additive mixed model (GAMM). For a shoulder *i* and an observation *j*
+measured in condition *c*:
+
+> **y**<sub>ij</sub> = β₀ + β₁·𝟙(c = in vivo) + **f**(x<sub>ij</sub>) + **g**(x<sub>ij</sub>)·𝟙(c = in vivo) + b<sub>i</sub> + ε<sub>ij</sub>
+
+which reads as two sentences:
+
+- **ex vivo:** y = β₀ + f(x) + b<sub>i</sub> + noise
+- **in vivo:** the same, **plus β₁ plus g(x)**
+
 The retained specification, validated in `analysis_shoulder.R` and reused for every cell:
 
 ```r
@@ -163,19 +173,51 @@ bam(Y ~ condO + s(TIME) + s(TIME, by = condO) + s(ID, bs = "re"),
     method = "fREML", discrete = TRUE, rho = rho, AR.start = ar_start)
 ```
 
-- `s(TIME)` — the common trajectory; `s(TIME, by = condO)` — the **shape** difference
-  between conditions; `condO` — a constant **level** shift; `s(ID, bs = "re")` — a random
-  intercept per shoulder.
+### Symbol → code → meaning
+
+| symbol | in the formula | what it is |
+| --- | --- | --- |
+| y<sub>ij</sub> | `Y` | the measured joint angle |
+| x<sub>ij</sub> | `TIME` | the predictor — thoracohumeral elevation angle. **Not time**; `TIME` is only the Monolix column convention |
+| *c* | `condO` | condition, an **ordered** factor; ex vivo is the reference level |
+| β₀ | (implicit intercept) | the ex-vivo baseline level |
+| 𝟙(c = in vivo) | the `by =` / factor coding | a switch: 1 on in-vivo rows, 0 on ex-vivo rows |
+| β₁ | `condO` | constant **level** shift between conditions |
+| f(x) | `s(TIME)` | the ex-vivo reference trajectory — a penalised thin-plate spline, f(x) = Σβ<sub>k</sub>B<sub>k</sub>(x), k = 10 |
+| g(x) | `s(TIME, by = condO)` | the **difference** smooth — the in-vivo departure from f, *not* the in-vivo curve. g ≡ 0 means the shapes agree |
+| b<sub>i</sub> | `s(ID, bs = "re")` | random intercept per shoulder, b<sub>i</sub> ~ N(0, σ<sub>b</sub>²) |
+| ε<sub>ij</sub> | `rho`, `AR.start` | the residual — AR(1)-correlated, restarted at each shoulder |
+| λ | `method = "fREML"` | one smoothing parameter per smooth, estimated (which is why k is a ceiling, not a wiggliness setting) |
+
+Notes on the fit:
+
 - Residuals within a curve are massively autocorrelated (lag-1 ρ ≈ 0.996 on the worked
   example), so an AR(1) correction is applied **within shoulder** via `rho` / `AR.start`.
   Without it the inference is wildly over-optimistic — BIC −31,454 with AR(1) versus
-  111,037 without.
+  111,037 without. ρ is *fixed* from an initial fit, not estimated jointly.
 - A parametric 4-parameter logistic NLME was tried first and abandoned: the data do not
   saturate over the observed range, so the plateau parameters are non-identifiable
   (BIC 125,717). The abandoned fit is kept in `figures/01_sigmoid_nlme/` on purpose.
 - The difference curve is evaluated **only on the x-overlap** of the two conditions, and
   the 33 compared cells get Benjamini–Hochberg FDR adjustment.
 
+### The identified values
+
+`analysis_shoulder.R` writes every fitted quantity of the worked example to
+`figures/02_spline_mixed_model/`:
+
+| file | contents |
+| --- | --- |
+| `00_coefficients.csv` | one row per element of `coef()` — 64 in total: β₀ (1), β₁ (1), the basis coefficients of f (9) and of g (9), and one b<sub>i</sub> per shoulder (44), each with its standard error and edf |
+| `00_variance_components.csv` | what is *not* a coefficient: the three λ, σ<sub>b</sub>, the residual σ, ρ, total edf and BIC |
+| `00_results_summary.txt` | the human-readable digest — edf / F / p per smooth, and the parametric terms |
+
+ε<sub>ij</sub> are **residuals, not parameters** — there is one per observation (22,102 of
+them); what is identified about them is σ and ρ in the second file.
+
+A symbol-by-symbol walkthrough of the equation, written for readers who know splines but
+not statistics, is published here:
+[**Anatomy of a GAMM**](https://claude.ai/code/artifact/6badf04e-b991-41ee-9315-d33627dc1c14).
 The full statistical rationale — model family, covariate selection, diagnostics, and why
 latent growth curve modelling was rejected — is in
 [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
@@ -189,7 +231,7 @@ latent growth curve modelling was rejected — is in
 | script | what it does | reads | writes |
 | --- | --- | --- | --- |
 | [`prepare_monolix_data.py`](prepare_monolix_data.py) | filters to angular data and reshapes to long format, in one streaming pass | `corrected_confident_data.csv` | `spartacus_angles_long.csv`, `monolix_st_frontal_dof2.csv` |
-| [`analysis_shoulder.R`](analysis_shoulder.R) | the pedagogical worked example: exploration → sigmoid NLME (rejected) → spline mixed model + AR(1) → difference curve | `monolix_st_frontal_dof2.csv` | `figures/00_data_exploration/`, `figures/01_sigmoid_nlme/`, `figures/02_spline_mixed_model/` |
+| [`analysis_shoulder.R`](analysis_shoulder.R) | the pedagogical worked example: exploration → sigmoid NLME (rejected) → spline mixed model + AR(1) → difference curve → coefficient export | `monolix_st_frontal_dof2.csv` | `figures/00_data_exploration/`, `figures/01_sigmoid_nlme/`, `figures/02_spline_mixed_model/` (figures, `00_results_summary.txt`, `00_coefficients.csv`, `00_variance_components.csv`) |
 | [`analyze_all.R`](analyze_all.R) | the same model over all 72 joint × movement × DoF cells, plus one plate per movement and FDR adjustment | `spartacus_angles_long.csv` | `figures/generalized/` (plates, per-cell drill-downs, `00_master_summary.csv`, `00_SUMMARY.md`) |
 | [`review_response_analysis.R`](review_response_analysis.R) | evidence for the reviewer response: study random effect, corrected ρ, signed effect size, leave-one-study-out | `spartacus_angles_long.csv` | console only |
 

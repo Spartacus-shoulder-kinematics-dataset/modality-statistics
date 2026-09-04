@@ -63,7 +63,7 @@ fig(S0, "02_spaghetti_by_unit.png", {
   for (u in levels(d$ID)) { du <- d[d$ID == u, ]
     lines(du$TIME, du$Y, col = adjustcolor(COL[as.character(du$cond[1])], 0.5)) }
   legend("topleft", names(COL), col = COL, lwd = 2, bty = "n")
-})
+}
 fig(S0, "03_x_sampling_density.png", {
   br <- seq(floor(min(d$TIME)), ceiling(max(d$TIME)), length.out = 40)
   h1 <- hist(d$TIME[d$cond=="ex vivo"], breaks = br, plot = FALSE)
@@ -238,6 +238,60 @@ fig(S2, "06_model_comparison.png", {
                 main = "Model comparison (BIC)")
   text(bp, pmax(bics, 0), round(bics), pos = 3, xpd = TRUE)
 })
+
+# =============================================================================
+# 4b. IDENTIFIED VALUES — every fitted quantity of the winning model
+# =============================================================================
+# Two CSVs, because the model holds two different kinds of number:
+#   00_coefficients.csv  one row per element of coef(m_ar) — beta0, beta1, the
+#                        basis coefficients of f and of g, and the 44 b_i.
+#   00_variance_components.csv  the quantities that are NOT coefficients:
+#                        smoothing parameters, residual scale, sigma_b, rho.
+# NOTE: eps_ij are residuals, not parameters — there is one per observation and
+#       what is identified about them is the scale and rho below.
+cf   <- coef(m_ar)
+se   <- sqrt(diag(m_ar$Vp))
+edf  <- m_ar$edf
+nm   <- names(cf)
+block <- ifelse(nm == "(Intercept)",                    "beta0_intercept",
+         ifelse(grepl("^condO",              nm),       "beta1_level_shift",
+         ifelse(grepl("^s\\(TIME\\)\\.",     nm),       "f_spline",
+         ifelse(grepl("^s\\(TIME\\):condO",  nm),       "g_difference_spline",
+         ifelse(grepl("^s\\(ID\\)",          nm),       "b_i_shoulder_re", "other")))))
+# recover which shoulder each random-effect coefficient belongs to
+label <- nm
+label[block == "b_i_shoulder_re"] <- levels(d$ID)
+
+coef_tab <- data.frame(block = block, term = nm, label = label,
+                       estimate = as.vector(cf), se = as.vector(se),
+                       edf = as.vector(edf), row.names = NULL)
+write.csv(coef_tab, file.path(FIG_DIR, S2, "00_coefficients.csv"), row.names = FALSE)
+
+vc <- gam.vcomp(m_ar, rescale = FALSE)          # sd scale, with CIs where available
+sig2 <- m_ar$sig2
+var_tab <- rbind(
+  data.frame(parameter = paste0("lambda[", names(m_ar$sp), "]"),
+             value = as.vector(m_ar$sp),
+             note  = "smoothing parameter (estimated by fREML)"),
+  data.frame(parameter = "sigma_b",
+             value = as.vector(vc[grep("s\\(ID\\)", rownames(vc)), 1]),
+             note  = "sd of the shoulder random intercept b_i"),
+  data.frame(parameter = "sigma_residual",
+             value = sqrt(sig2), note = "residual sd of eps_ij (scale^0.5)"),
+  data.frame(parameter = "rho",
+             value = rho, note = "AR(1) correlation — FIXED, not estimated"),
+  data.frame(parameter = "edf_total",
+             value = sum(edf), note = "effective degrees of freedom used"),
+  data.frame(parameter = "n_coefficients",
+             value = length(cf), note = "length of coef(m_ar)"),
+  data.frame(parameter = "n_observations",
+             value = nrow(d), note = "rows fitted"),
+  data.frame(parameter = "BIC", value = BIC(m_ar), note = "spline + AR(1)"))
+write.csv(var_tab, file.path(FIG_DIR, S2, "00_variance_components.csv"), row.names = FALSE)
+
+cat(sprintf("\nWrote %d coefficients and %d variance components to %s/\n",
+            nrow(coef_tab), nrow(var_tab), file.path(FIG_DIR, S2)))
+print(table(coef_tab$block))
 
 # =============================================================================
 # 5. RESULTS DIGEST (in the winning iteration's folder)
