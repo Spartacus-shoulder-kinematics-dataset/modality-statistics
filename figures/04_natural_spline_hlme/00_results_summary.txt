@@ -10,8 +10,8 @@ VARIANT COMPARISON (resid_acf1 is the metric this iteration exists to improve):
 1   R1_intercept  random = ~1 (iteration 03)      TRUE      14  -9729 19510
 2 R2_spline_diag random = ~ns(...), diagonal      TRUE      19  -3189  6449
   resid_acf1 resid_sd    skew kurtosis wald_pass wald_total seconds
-1     0.9775   3.1703 -0.2590    1.184         8         12   11.25
-2     0.8356   0.4367 -0.4447   12.553         7         12   15.98
+1     0.9775   3.1703 -0.2590    1.184         8         12   12.15
+2     0.8356   0.4367 -0.4447   12.553         7         12   17.17
 
   iteration 03 (random intercept) left lag-1 ACF = 0.978
   this iteration                  leaves lag-1 ACF = 0.838
@@ -71,10 +71,10 @@ df SWEEP (diagonal random spline — does a smaller basis rescue normality?):
 3    9.441         6         10             4              5              2
 4   12.553         7         12             5              6              2
   wald_total_diff seconds
-1               3   10.77
-2               4   13.26
-3               5   14.39
-4               6   16.71
+1               3   11.59
+2               4   14.20
+3               5   15.77
+4               6   17.56
 
 WALD PASSED PER CURVE, PER df (see 00_wald_tests_by_df.csv for every coefficient):
  K n_random wald_pass_ref wald_total_ref wald_pass_diff wald_total_diff
@@ -84,7 +84,7 @@ WALD PASSED PER CURVE, PER df (see 00_wald_tests_by_df.csv for every coefficient
  5        6             5              6              2               6
 
 x-OVERLAP TRIM (does removing the extrapolated tails rescue normality?):
-trimmed to 14.0-150.0 deg (3378 rows, 91% kept), converged in 25 s
+trimmed to 14.0-150.0 deg (3378 rows, 91% kept), converged in 27 s
                      full range      trimmed
   resid sd              0.437        0.304
   excess kurtosis       12.55         5.25

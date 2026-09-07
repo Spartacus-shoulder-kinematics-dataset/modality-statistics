@@ -43,9 +43,18 @@ BLUE    <- "#377eb8"
 
 OUT <- file.path(FIG_DIR, S4)
 dir.create(OUT, showWarnings = FALSE, recursive = TRUE)
-fig <- function(name, expr, w = 1100, h = 750, res = 130) {
-  png(file.path(OUT, name), width = w, height = h, res = res)
-  on.exit(dev.off()); force(expr); message("  saved ", file.path(S4, name))
+# Every figure is rendered twice: a high-resolution PNG and a vector PDF.
+# `draw` is a FUNCTION, not a braced expression — a promise would evaluate on the
+# first device only and the second file would come out blank.
+FIG_SCALE <- 2.2
+fig <- function(name, draw, w = 1100, h = 750, res = 130) {
+  base <- sub("\\.png$", "", name)
+  png(file.path(OUT, paste0(base, ".png")),
+      width = round(w*FIG_SCALE), height = round(h*FIG_SCALE), res = round(res*FIG_SCALE))
+  op <- par(no.readonly = TRUE); tryCatch(draw(), finally = { par(op); dev.off() })
+  pdf(file.path(OUT, paste0(base, ".pdf")), width = w/res, height = h/res)
+  op <- par(no.readonly = TRUE); tryCatch(draw(), finally = { par(op); dev.off() })
+  message("  saved ", file.path(S4, base), ".png/.pdf")
 }
 
 # Knots are PHYSICAL positions on the elevation axis, not an abstract tuning knob,
@@ -229,7 +238,7 @@ curves <- do.call(rbind, lapply(levels(dt$cond), function(cc) {
   cbind(cond = cc, x = xc, band(Xrow(xc, if (cc == "in vivo") 1 else 0)))
 }))
 
-fig("01_population_curves_by_condition.png", {
+fig("01_population_curves_by_condition.png", function() {
   plot(dt$TIME, dt$Y, col = adjustcolor(COL[as.character(dt$cond)], 0.25), pch = 16, cex = 0.5,
        xlab = "Humerothoracic elevation (x)", ylab = "Scapulothoracic angle (y)",
        main = sprintf("Random spline: %s", fits[[best_id]]$lab))
@@ -250,7 +259,7 @@ ov <- c(max(min(dt$TIME[dt$cond=="ex vivo"]), min(dt$TIME[dt$cond=="in vivo"])),
         min(max(dt$TIME[dt$cond=="ex vivo"]), max(dt$TIME[dt$cond=="in vivo"])))
 xd  <- seq(ov[1], ov[2], length.out = 300)
 dif <- band(Xdiff(xd))
-fig("02_difference_invivo_minus_exvivo.png", {
+fig("02_difference_invivo_minus_exvivo.png", function() {
   plot(xd, dif$fit, type = "n", ylim = range(dif$lo, dif$hi, 0),
        xlab = "Humerothoracic elevation (x)", ylab = "in vivo - ex vivo (ST angle)",
        main = "Estimated difference +/- 95% CI (overlap only)")
@@ -263,7 +272,7 @@ fig("02_difference_invivo_minus_exvivo.png", {
 })
 
 res <- m$pred$resid_ss; z <- (res - mean(res))/sd(res); nstat <- norm_stats(res)
-fig("03_diagnostics.png", {
+fig("03_diagnostics.png", function() {
   op <- par(mfrow = c(2,2), mar = c(4,4,3,1)); on.exit(par(op), add = TRUE)
   plot(m$pred$pred_ss, res, pch = 16, cex = 0.4, col = adjustcolor("grey20", 0.3),
        xlab = "fitted", ylab = "residual", main = "Residuals vs fitted"); abline(h = 0, col = "red")
@@ -279,7 +288,7 @@ fig("03_diagnostics.png", {
 
 # every random effect, not just the intercept
 RE <- m$predRE
-fig("04_random_effects.png", {
+fig("04_random_effects.png", function() {
   nre <- ncol(RE) - 1
   op <- par(mfrow = c(2, ceiling(nre/2)), mar = c(4,4,3,1)); on.exit(par(op), add = TRUE)
   for (j in 2:ncol(RE)) {
@@ -291,7 +300,7 @@ fig("04_random_effects.png", {
 
 acf_res <- acf_curve(res, dt$IDnum, lag.max = 40)
 acf03   <- vt$resid_acf1[vt$variant == "R1_intercept"]
-fig("05_autocorrelation.png", {
+fig("05_autocorrelation.png", function() {
   plot(0:(length(acf_res)-1), acf_res, type = "h", lwd = 2, ylim = range(0, acf_res, 1),
        xlab = "lag (points within a shoulder)", ylab = "residual ACF",
        main = sprintf("Residual ACF after a random CURVE: lag-1 = %.3f", acf_res[2]))
@@ -302,7 +311,7 @@ fig("05_autocorrelation.png", {
                     sprintf("random spline: %.3f", acf_res[2])))
 })
 
-fig("06_variant_comparison.png", {
+fig("06_variant_comparison.png", function() {
   o <- vt[vt$converged, ]
   op <- par(mfrow = c(1,2), mar = c(7,4,3,1)); on.exit(par(op), add = TRUE)
   bp <- barplot(o$resid_acf1, names.arg = sub("^R[0-9]_", "", o$variant), las = 2,
@@ -393,7 +402,7 @@ write.csv(data.frame(
   file.path(OUT, "00_overlap_trim.csv"), row.names = FALSE)
 
 if (!inherits(m_tr, "try-error") && m_tr$conv == 1) {
-  fig("13_overlap_trim_diagnostics.png", {
+  fig("13_overlap_trim_diagnostics.png", function() {
     op <- par(mfrow = c(2, 2), mar = c(4, 4, 3, 1)); on.exit(par(op), add = TRUE)
     for (nm in c("full range", "trimmed to overlap")) {
       rr2 <- if (nm == "full range") m$pred$resid_ss else m_tr$pred$resid_ss
@@ -496,7 +505,7 @@ cm_for <- function(mm, BB, KK) {
 }
 
 # --- the four by-df views, mirroring iteration 03 --------------------------
-fig("07_by_df_population_curves.png", {
+fig("07_by_df_population_curves.png", function() {
   op <- par(mfrow = c(2, 2), mar = c(4, 4, 3, 1)); on.exit(par(op), add = TRUE)
   for (kk in KS) {
     e <- swfit[[as.character(kk)]]
@@ -528,7 +537,7 @@ difs4 <- lapply(KS, function(kk) { e <- swfit[[as.character(kk)]]
 names(difs4) <- as.character(KS)
 ylim4 <- range(0, unlist(lapply(difs4, function(z) if (is.null(z)) NULL else c(z$lo, z$hi))))
 
-fig("08_by_df_difference.png", {
+fig("08_by_df_difference.png", function() {
   op <- par(mfrow = c(2, 2), mar = c(4, 4, 3, 1)); on.exit(par(op), add = TRUE)
   for (kk in KS) {
     z <- difs4[[as.character(kk)]]
@@ -551,7 +560,7 @@ fig("08_by_df_difference.png", {
 })
 
 # Does a smaller basis rescue normality? One row per K: Q-Q and histogram.
-fig("09_by_df_diagnostics.png", {
+fig("09_by_df_diagnostics.png", function() {
   op <- par(mfrow = c(length(KS), 2), mar = c(4, 4, 2.6, 1)); on.exit(par(op), add = TRUE)
   for (kk in KS) {
     e <- swfit[[as.character(kk)]]
@@ -571,7 +580,7 @@ fig("09_by_df_diagnostics.png", {
 # The random INTERCEPT at every df — the one component present in all four models,
 # so it is the comparable one. Its sd barely moves; the higher-order random
 # effects are what change.
-fig("10_by_df_random_effects.png", {
+fig("10_by_df_random_effects.png", function() {
   op <- par(mfrow = c(2, 2), mar = c(4, 4, 3, 1)); on.exit(par(op), add = TRUE)
   lim <- range(unlist(lapply(KS, function(kk) { e <- swfit[[as.character(kk)]]
     if (is.null(e)) NULL else e$m$predRE[[2]] })), na.rm = TRUE)
@@ -591,7 +600,7 @@ fig("10_by_df_random_effects.png", {
 
 # Which coefficients survive, at every df. A grid of Wald statistics: one column
 # per df, one row per term, so a term that only "passes" at some df is obvious.
-fig("11_by_df_wald.png", {
+fig("11_by_df_wald.png", function() {
   op <- par(mar = c(4.5, 11, 3.5, 2)); on.exit(par(op), add = TRUE)
   # order: all reference-curve terms first (intercept, ns1..nsK), then all
   # difference-curve terms — otherwise the separator line below is meaningless,
@@ -626,7 +635,7 @@ fig("11_by_df_wald.png", {
   mtext("reference curve below the line, difference curve above", side = 3, cex = 0.75, line = 0.2)
 }, w = 1000, h = 850, res = 130)
 
-fig("12_by_df_tradeoff.png", {
+fig("12_by_df_tradeoff.png", function() {
   o <- swt[swt$converged, ]
   op <- par(mfrow = c(1, 3), mar = c(4.5, 4.5, 3, 1)); on.exit(par(op), add = TRUE)
   plot(o$K, o$kurtosis, type = "b", pch = 16, lwd = 2, col = BLUE, xlab = "spline df (K)",
