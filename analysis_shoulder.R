@@ -63,7 +63,7 @@ fig(S0, "02_spaghetti_by_unit.png", {
   for (u in levels(d$ID)) { du <- d[d$ID == u, ]
     lines(du$TIME, du$Y, col = adjustcolor(COL[as.character(du$cond[1])], 0.5)) }
   legend("topleft", names(COL), col = COL, lwd = 2, bty = "n")
-}
+})
 fig(S0, "03_x_sampling_density.png", {
   br <- seq(floor(min(d$TIME)), ceiling(max(d$TIME)), length.out = 40)
   h1 <- hist(d$TIME[d$cond=="ex vivo"], breaks = br, plot = FALSE)

@@ -1,0 +1,37 @@
+"K","n_fixed","retained","curve","term","estimate","se","wald","p_value","passed"
+2,6,FALSE,"reference (ex vivo)","intercept",-5.19701,1.86255,-2.79026603312663,0.00527,TRUE
+2,6,FALSE,"reference (ex vivo)","ns1",-51.47811,1.01633,-50.6509795046884,0,TRUE
+2,6,FALSE,"reference (ex vivo)","ns2",-86.69899,1.11107,-78.0319781831928,0,TRUE
+2,6,FALSE,"difference (in vivo - ex vivo)","condin vivo",5.91289,2.19711,2.6912125473918,0.00712,TRUE
+2,6,FALSE,"difference (in vivo - ex vivo)","ns1:condin vivo",-22.9899,1.11882,-20.5483455783772,0,TRUE
+2,6,FALSE,"difference (in vivo - ex vivo)","ns2:condin vivo",40.97613,1.16114,35.2895688719706,0,TRUE
+3,8,FALSE,"reference (ex vivo)","intercept",-8.96651,2.01889,-4.44130685673811,1e-05,TRUE
+3,8,FALSE,"reference (ex vivo)","ns1",-23.12016,0.57993,-39.8671563809425,0,TRUE
+3,8,FALSE,"reference (ex vivo)","ns2",-46.35534,2.97386,-15.5875999542682,0,TRUE
+3,8,FALSE,"reference (ex vivo)","ns3",-79.33099,2.34021,-33.8990902525842,0,TRUE
+3,8,FALSE,"difference (in vivo - ex vivo)","condin vivo",8.16328,2.34329,3.48368319755557,0.00049,TRUE
+3,8,FALSE,"difference (in vivo - ex vivo)","ns1:condin vivo",-13.40221,0.65195,-20.5571132755579,0,TRUE
+3,8,FALSE,"difference (in vivo - ex vivo)","ns2:condin vivo",-20.86763,3.08659,-6.76073919762586,0,TRUE
+3,8,FALSE,"difference (in vivo - ex vivo)","ns3:condin vivo",32.21822,2.37926,13.5412775400755,0,TRUE
+4,10,FALSE,"reference (ex vivo)","intercept",3.05652,2.29529,1.33164872412636,0.18298,FALSE
+4,10,FALSE,"reference (ex vivo)","ns1",-10.10451,1.28473,-7.86508449246145,0,TRUE
+4,10,FALSE,"reference (ex vivo)","ns2",-46.38621,1.21352,-38.2245121629639,0,TRUE
+4,10,FALSE,"reference (ex vivo)","ns3",-60.24435,3.35234,-17.9708352971357,0,TRUE
+4,10,FALSE,"reference (ex vivo)","ns4",-45.4744,3.63267,-12.5181753365981,0,TRUE
+4,10,FALSE,"difference (in vivo - ex vivo)","condin vivo",-3.74337,2.59462,-1.44274306064086,0.14909,FALSE
+4,10,FALSE,"difference (in vivo - ex vivo)","ns1:condin vivo",-19.05127,1.34153,-14.2011509246905,0,TRUE
+4,10,FALSE,"difference (in vivo - ex vivo)","ns2:condin vivo",5.87281,1.27367,4.6109353286173,0,TRUE
+4,10,FALSE,"difference (in vivo - ex vivo)","ns3:condin vivo",-4.5188,3.49301,-1.29366935680115,0.19578,FALSE
+4,10,FALSE,"difference (in vivo - ex vivo)","ns4:condin vivo",-3.30706,3.67951,-0.898777282844727,0.36877,FALSE
+5,12,TRUE,"reference (ex vivo)","intercept",4.08409,2.86068,1.42766405190374,0.15339,FALSE
+5,12,TRUE,"reference (ex vivo)","ns1",-10.47998,1.9949,-5.25338613464334,0,TRUE
+5,12,TRUE,"reference (ex vivo)","ns2",-22.91146,2.45635,-9.32744112198995,0,TRUE
+5,12,TRUE,"reference (ex vivo)","ns3",-52.02426,1.36736,-38.0472296981044,0,TRUE
+5,12,TRUE,"reference (ex vivo)","ns4",-53.58052,5.95436,-8.99853552690801,0,TRUE
+5,12,TRUE,"reference (ex vivo)","ns5",-30.17505,5.7648,-5.23436199000833,0,TRUE
+5,12,TRUE,"difference (in vivo - ex vivo)","condin vivo",-6.06387,3.12324,-1.94153187074961,0.05219,FALSE
+5,12,TRUE,"difference (in vivo - ex vivo)","ns1:condin vivo",-13.71607,2.04877,-6.69478272329251,0,TRUE
+5,12,TRUE,"difference (in vivo - ex vivo)","ns2:condin vivo",-9.51779,2.53973,-3.74755977997661,0.00018,TRUE
+5,12,TRUE,"difference (in vivo - ex vivo)","ns3:condin vivo",8.53308,1.42664,5.98124264004935,0,TRUE
+5,12,TRUE,"difference (in vivo - ex vivo)","ns4:condin vivo",-5.54317,6.0871,-0.910642177720096,0.36248,FALSE
+5,12,TRUE,"difference (in vivo - ex vivo)","ns5:condin vivo",-18.34187,5.8073,-3.1584161314208,0.00159,TRUE

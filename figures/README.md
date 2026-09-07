@@ -3,8 +3,8 @@
 Two things live here:
 
 1. **The worked example** (`00_data_exploration/`, `01_sigmoid_nlme/`,
-   `02_spline_mixed_model/`) — the deep, pedagogical single-subset analysis,
-   kept as iteration sets (see below).
+   `02_spline_mixed_model/`, `03_natural_spline_hlme/`) — the deep, pedagogical
+   single-subset analysis, kept as iteration sets (see below).
 2. **`generalized/`** — the same model applied to **every** joint x movement x
    DoF, with one **planche per movement**. See
    [`generalized/00_SUMMARY.md`](generalized/00_SUMMARY.md).
@@ -117,6 +117,50 @@ zero near end-range.
 degrees (verify provenance); only 44 heavily imbalanced units, so between-study
 variance is modest to estimate; AR(1) handles within-curve autocorrelation only
 approximately.
+
+---
+
+## `03_natural_spline_hlme/` — how few parameters can we get away with?
+
+Produced by [`../analysis_hlme.R`](../analysis_hlme.R), not `analysis_shoulder.R`.
+It has its own [`README.md`](03_natural_spline_hlme/README.md) and
+[`notice.md`](03_natural_spline_hlme/notice.md).
+
+Iteration 02 works but spends **64 coefficients**, none of which can be read
+individually: the penalised basis weights are correlated, meaningless on their own,
+and only testable as a whole smooth. So iteration 03 asks the opposite question —
+replace the penalised thin-plate basis with a plain **natural spline**
+(`splines::ns`), fit by **`lcmm::hlme`**, and test **every coefficient** with a Wald
+statistic.
+
+```bash
+Rscript analysis_hlme.R           # ~1 min 35 s
+```
+
+| | iteration 02 | iteration 03 |
+| --- | --- | --- |
+| parameters | 64 coefficients + 3 λ + 2 variances | **12 fixed effects + 2 variances** |
+| inference | F-test per smooth | **Wald test per coefficient** |
+| autocorrelation | AR(1), ρ fixed at 0.996 | **not modelled** — see below |
+| residual normality | not checked | **checked — the acceptance criterion** |
+
+**Result.** `ns(TIME, df=5)` retained by BIC. Wald tests (`|coef/se| ≥ 1.96`) pass
+**5/6** on the ex-vivo reference curve and **4/6** on the difference curve — the
+shape difference is well determined (three interaction terms pass, one at Wald 6.7),
+while the constant level shift lands at 1.94, just under threshold. Residuals are
+near-normal (skew −0.25, excess kurtosis 1.18, straight Q-Q). The between-shoulder
+sd comes out at **6.37** against the GAMM's **6.31** — an independent confirmation
+that the two iterations agree on the parts they share.
+
+**The caveat.** Within-shoulder residual autocorrelation is **0.970 and unmodelled**,
+so the Wald SEs are optimistic — the counts are descriptive, not calibrated tests.
+`cor = AR(TIME)` cannot fix it here: its decay estimates to ~0, which makes it
+*aliased with the random intercept*, and it then swallows both the random-effect and
+residual variances. That failed fit is kept and documented in
+`00_results_summary.txt`, the same way iteration 01's sigmoid is kept.
+
+**Iteration 02 remains the reference for inference.** Iteration 03 is the answer to
+"can each parameter be tested", not a replacement.
 
 ---
 

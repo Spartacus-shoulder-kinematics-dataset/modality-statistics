@@ -46,7 +46,10 @@ There is no dependency manifest in this repo (no `renv.lock`, `DESCRIPTION`, `.R
 `prepare_monolix_data.py` uses **only the standard library** (`csv`, `sys`) — no pip
 install, no virtualenv, no `requirements.txt` needed.
 
-The three live R scripts need exactly **`mgcv`, `nlme`, `dplyr`**. Other packages
+[`analysis_hlme.R`](analysis_hlme.R) additionally needs **`lcmm`** (it compiles Fortran, so
+allow a few minutes to install) and `splines`, which ships with R.
+
+The three core R scripts need exactly **`mgcv`, `nlme`, `dplyr`**. Other packages
 (`tidyr`, `lme4`, `here`, `lattice`, `MASS`) are used only by the retired/tutorial
 scripts; `ggplot2` and `lavaan` are needed by some of those and are **not installed** on
 the reference machine — those scripts will not run without installing them first.
@@ -141,6 +144,7 @@ the raw dataset as described under [Data](#data).
 ```bash
 python3 prepare_monolix_data.py     # raw CSV -> the two derived long CSVs
 Rscript analysis_shoulder.R         # worked example -> figures/00_, 01_, 02_
+Rscript analysis_hlme.R             # iteration 03   -> figures/03_  (needs lcmm, ~95 s)
 Rscript analyze_all.R               # 72-cell sweep -> figures/generalized/  (long-running)
 Rscript review_response_analysis.R  # reviewer-response evidence, console output only
 ```
@@ -215,6 +219,26 @@ Notes on the fit:
 ε<sub>ij</sub> are **residuals, not parameters** — there is one per observation (22,102 of
 them); what is identified about them is σ and ρ in the second file.
 
+### A second model: fewer parameters, one test each (iteration 03)
+
+The GAMM above is the reference for inference, but none of its 64 coefficients can be read
+individually. [`analysis_hlme.R`](analysis_hlme.R) fits an alternative built for the
+opposite priority — a plain natural spline via `lcmm::hlme`:
+
+```r
+hlme(fixed = Y ~ ns(TIME, df = 5) * cond, random = ~1, subject = "IDnum", ng = 1)
+```
+
+**12 fixed effects instead of 64 coefficients**, each with its own Wald test
+(`|coef/se| ≥ 1.96`): 5/6 pass on the ex-vivo reference curve, 4/6 on the difference curve.
+Residuals are near-normal (excess kurtosis 1.18), and the between-shoulder sd of 6.37 agrees
+with the GAMM's 6.31.
+
+Its limitation is the mirror image of its strength: the within-shoulder residual
+autocorrelation of **0.970 is not modelled**, so those Wald SEs are optimistic. `AR(TIME)`
+cannot fix it — its decay estimates to zero, making it aliased with the random intercept.
+Details in [`figures/03_natural_spline_hlme/README.md`](figures/03_natural_spline_hlme/README.md).
+
 A symbol-by-symbol walkthrough of the equation, written for readers who know splines but
 not statistics, is published here:
 [**Anatomy of a GAMM**](https://claude.ai/code/artifact/6badf04e-b991-41ee-9315-d33627dc1c14).
@@ -232,6 +256,7 @@ latent growth curve modelling was rejected — is in
 | --- | --- | --- | --- |
 | [`prepare_monolix_data.py`](prepare_monolix_data.py) | filters to angular data and reshapes to long format, in one streaming pass | `corrected_confident_data.csv` | `spartacus_angles_long.csv`, `monolix_st_frontal_dof2.csv` |
 | [`analysis_shoulder.R`](analysis_shoulder.R) | the pedagogical worked example: exploration → sigmoid NLME (rejected) → spline mixed model + AR(1) → difference curve → coefficient export | `monolix_st_frontal_dof2.csv` | `figures/00_data_exploration/`, `figures/01_sigmoid_nlme/`, `figures/02_spline_mixed_model/` (figures, `00_results_summary.txt`, `00_coefficients.csv`, `00_variance_components.csv`) |
+| [`analysis_hlme.R`](analysis_hlme.R) | iteration 03: natural spline + `lcmm::hlme`, 12 parameters instead of 64, with a Wald test per coefficient and a residual-normality check | `monolix_st_frontal_dof2.csv` | `figures/03_natural_spline_hlme/` (figures, `00_coefficients.csv`, `00_wald_tests.csv`, `00_model_selection.csv`, `00_thinning.csv`) |
 | [`analyze_all.R`](analyze_all.R) | the same model over all 72 joint × movement × DoF cells, plus one plate per movement and FDR adjustment | `spartacus_angles_long.csv` | `figures/generalized/` (plates, per-cell drill-downs, `00_master_summary.csv`, `00_SUMMARY.md`) |
 | [`review_response_analysis.R`](review_response_analysis.R) | evidence for the reviewer response: study random effect, corrected ρ, signed effect size, leave-one-study-out | `spartacus_angles_long.csv` | console only |
 
