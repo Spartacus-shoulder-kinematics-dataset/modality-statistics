@@ -3,8 +3,8 @@
 Two things live here:
 
 1. **The worked example** (`00_data_exploration/`, `01_sigmoid_nlme/`,
-   `02_spline_mixed_model/`, `03_natural_spline_hlme/`) — the deep, pedagogical
-   single-subset analysis, kept as iteration sets (see below).
+   `02_spline_mixed_model/`, `03_natural_spline_hlme/`, `04_natural_spline_hlme/`) — the
+   deep, pedagogical single-subset analysis, kept as iteration sets (see below).
 2. **`generalized/`** — the same model applied to **every** joint x movement x
    DoF, with one **planche per movement**. See
    [`generalized/00_SUMMARY.md`](generalized/00_SUMMARY.md).
@@ -161,6 +161,47 @@ residual variances. That failed fit is kept and documented in
 
 **Iteration 02 remains the reference for inference.** Iteration 03 is the answer to
 "can each parameter be tested", not a replacement.
+
+---
+
+## `04_natural_spline_hlme/` — a random CURVE per shoulder
+
+Produced by [`../analysis_random_spline.R`](../analysis_random_spline.R). Its own
+[`README.md`](04_natural_spline_hlme/README.md) and
+[`notice.md`](04_natural_spline_hlme/notice.md).
+
+Iteration 03 left its residual autocorrelation at **0.978, unmodelled**, and said the honest
+fix was a random *smooth* per shoulder. This iteration does that — the canonical `lcmm`
+pattern, putting the whole spline basis in the random effects so each shoulder gets its own
+curve rather than just its own height:
+
+```r
+hlme(fixed = Y ~ ns(TIME, knots) * cond, random = ~ ns(TIME, knots), ...)
+```
+
+It also switches to **explicit knots** (interior 40/70/100/130°, boundary 0/160°), which
+makes the intercept and level-shift terms interpretable at 0° of elevation instead of at an
+extrapolated point.
+
+**It fixes 03's defect and breaks 03's guarantee.** BIC falls 19,510 → 6,348, residual sd
+3.17° → 0.43°, and the ACF changes from a slow drift to a short-range oscillation that dies
+within ~6 lags. But excess kurtosis goes **1.18 → 12.98**: once the random curve absorbs each
+shoulder's trajectory, what is left is crumbs, and the normality criterion fails.
+
+The two requirements pull against each other:
+
+| | autocorrelation handled | residuals normal |
+| --- | :---: | :---: |
+| iteration 03 (`random = ~1`) | ✗ | ✓ |
+| iteration 04 (`random = ~ns`) | mostly ✓ | ✗ |
+
+The scientific consequence is real: with shoulders allowed their own shapes, the difference
+curve drops from **4/6 to 2/6** passing Wald terms — iteration 03's standard errors were
+optimistic, as it had warned. What survives in both is a shape difference at low-to-mid
+elevation; the level difference at 0° is −4.06° ± 2.31 and not distinguishable from zero.
+
+> For the 72-cell sweep use the **diagonal** variant `R2_spline_diag`: the unstructured one
+> costs 40× the runtime (659 s vs 16 s) for 101 BIC units and an identical ACF.
 
 ---
 

@@ -1,0 +1,13 @@
+"curve","term","estimate","se","wald","p_value","passed"
+"reference (ex vivo)","intercept",0.83392,1.96756,0.423834597166033,0.67169,FALSE
+"reference (ex vivo)","ns1",-8.52316,1.68795,-5.0494149708226,0,TRUE
+"reference (ex vivo)","ns2",-19.02897,2.23906,-8.49864228738846,0,TRUE
+"reference (ex vivo)","ns3",-43.27837,2.49255,-17.3630900082245,0,TRUE
+"reference (ex vivo)","ns4",-55.22721,4.85114,-11.3843776926661,0,TRUE
+"reference (ex vivo)","ns5",-48.78046,6.65288,-7.33223205589158,0,TRUE
+"difference (in vivo - ex vivo)","condin vivo",-4.0613,2.31165,-1.75688361127333,0.07894,FALSE
+"difference (in vivo - ex vivo)","ns1:condin vivo",-13.82029,1.97727,-6.98958159482519,0,TRUE
+"difference (in vivo - ex vivo)","ns2:condin vivo",-12.35297,2.63636,-4.68561577326314,0,TRUE
+"difference (in vivo - ex vivo)","ns3:condin vivo",5.16133,2.95709,1.74540849280881,0.08091,FALSE
+"difference (in vivo - ex vivo)","ns4:condin vivo",-0.76513,5.60175,-0.13658767349489,0.89136,FALSE
+"difference (in vivo - ex vivo)","ns5:condin vivo",4.28629,7.74317,0.553557522306755,0.57988,FALSE

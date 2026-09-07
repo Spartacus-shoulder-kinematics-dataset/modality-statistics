@@ -1,0 +1,107 @@
+Scapulothoracic rhythm — iteration 04: RANDOM spline
+====================================================
+
+Data: 22102 obs thinned to 3724 (<=100/shoulder), 44 shoulders.
+Basis: ns with EXPLICIT knots 40,70,100,130, boundary 0,160 (5 columns).
+RETAINED: random = ~ns(...), unstructured
+
+VARIANT COMPARISON (resid_acf1 is the metric this iteration exists to improve):
+          variant                            spec converged n_param loglik
+1    R1_intercept      random = ~1 (iteration 03)      TRUE      14  -9729
+2  R2_spline_diag     random = ~ns(...), diagonal      TRUE      19  -3189
+3 R3_spline_unstr random = ~ns(...), unstructured      TRUE      34  -3110
+    BIC resid_acf1 resid_sd    skew kurtosis wald_pass wald_total seconds
+1 19510     0.9775   3.1703 -0.2590    1.184         8         12   11.68
+2  6449     0.8356   0.4367 -0.4447   12.553         7         12   16.41
+3  6348     0.8352   0.4333 -0.4381   12.984         7         12  661.49
+
+  iteration 03 (random intercept) left lag-1 ACF = 0.978
+  this iteration                  leaves lag-1 ACF = 0.836
+
+FIXED EFFECTS (Wald = coef/se):
+                            curve            term estimate    se     wald
+1             reference (ex vivo)       intercept   0.8339 1.968   0.4238
+2             reference (ex vivo)             ns1  -8.5232 1.688  -5.0494
+3             reference (ex vivo)             ns2 -19.0290 2.239  -8.4986
+4             reference (ex vivo)             ns3 -43.2784 2.493 -17.3631
+5             reference (ex vivo)             ns4 -55.2272 4.851 -11.3844
+6             reference (ex vivo)             ns5 -48.7805 6.653  -7.3322
+7  difference (in vivo - ex vivo)     condin vivo  -4.0613 2.312  -1.7569
+8  difference (in vivo - ex vivo) ns1:condin vivo -13.8203 1.977  -6.9896
+9  difference (in vivo - ex vivo) ns2:condin vivo -12.3530 2.636  -4.6856
+10 difference (in vivo - ex vivo) ns3:condin vivo   5.1613 2.957   1.7454
+11 difference (in vivo - ex vivo) ns4:condin vivo  -0.7651 5.602  -0.1366
+12 difference (in vivo - ex vivo) ns5:condin vivo   4.2863 7.743   0.5536
+   p_value passed
+1  0.67169  FALSE
+2  0.00000   TRUE
+3  0.00000   TRUE
+4  0.00000   TRUE
+5  0.00000   TRUE
+6  0.00000   TRUE
+7  0.07894  FALSE
+8  0.00000   TRUE
+9  0.00000   TRUE
+10 0.08091  FALSE
+11 0.89136  FALSE
+12 0.57988  FALSE
+
+WALD PASSED: reference 5/6 | difference 2/6
+
+VARIANCE COMPONENTS:
+   parameter   estimate       se
+13  varcov 1  4.505e+01 0.757175
+14  varcov 2 -1.358e+01 0.982737
+15  varcov 3  3.239e+01 0.599654
+16  varcov 4 -2.242e+01 1.339686
+17  varcov 5  3.236e+01 1.217021
+18  varcov 6  5.909e+01 0.541300
+19  varcov 7 -1.891e+01 1.371611
+20  varcov 8  9.793e+00 1.800541
+21  varcov 9  3.486e+01 1.182154
+22 varcov 10  7.808e+01 0.774260
+23 varcov 11 -1.473e+01 1.375172
+24 varcov 12  2.372e+01 2.846562
+25 varcov 13  5.530e+01 2.350145
+26 varcov 14 -4.176e+00 2.277336
+27 varcov 15  2.279e+02 1.605998
+28 varcov 16 -2.374e-04 0.005107
+29 varcov 17 -1.413e+01 3.830858
+30 varcov 18  1.688e+01 3.479605
+31 varcov 19 -3.769e+01 3.523660
+32 varcov 20  2.824e+02 2.634223
+33 varcov 21  4.593e+02 0.705521
+34    stderr  4.488e-01 0.005410
+
+RESIDUAL NORMALITY:
+  skew -0.438 | excess kurtosis 12.984 | within +/-1.96 sd 94.7%
+
+df SWEEP (diagonal random spline — does a smaller basis rescue normality?):
+  K n_random         knots converged n_param   BIC resid_acf1 resid_sd    skew
+1 2        3            90      TRUE      10 12361     0.9381   1.1079 -0.6941
+2 3        4        60/110      TRUE      13  9248     0.8992   0.6939 -0.4791
+3 4        5     50/90/120      TRUE      16  7607     0.8710   0.5319 -0.3496
+4 5        6 40/70/100/130      TRUE      19  6449     0.8356   0.4367 -0.4447
+  kurtosis wald_pass wald_total wald_pass_ref wald_total_ref wald_pass_diff
+1    5.700         5          6             3              3              2
+2    6.727         7          8             4              4              3
+3    9.441         6         10             4              5              2
+4   12.553         7         12             5              6              2
+  wald_total_diff seconds
+1               3   11.20
+2               4   14.11
+3               5   15.12
+4               6   17.49
+
+WALD PASSED PER CURVE, PER df (see 00_wald_tests_by_df.csv for every coefficient):
+ K n_random wald_pass_ref wald_total_ref wald_pass_diff wald_total_diff
+ 2        3             3              3              2               3
+ 3        4             4              4              3               4
+ 4        5             4              5              2               5
+ 5        6             5              6              2               6
+
+NOTE ON gamma_0: the boundary knot is at 0 deg, so 'condin vivo' is now the
+  in-vivo minus ex-vivo difference AT 0 deg of elevation — an interpretable
+  quantity, unlike iteration 03 where the basis vanished at -3.46 deg.
+
+CAVEAT: condition remains confounded with source study — descriptive, not causal.

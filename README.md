@@ -46,8 +46,9 @@ There is no dependency manifest in this repo (no `renv.lock`, `DESCRIPTION`, `.R
 `prepare_monolix_data.py` uses **only the standard library** (`csv`, `sys`) — no pip
 install, no virtualenv, no `requirements.txt` needed.
 
-[`analysis_hlme.R`](analysis_hlme.R) additionally needs **`lcmm`** (it compiles Fortran, so
-allow a few minutes to install) and `splines`, which ships with R.
+[`analysis_hlme.R`](analysis_hlme.R) and
+[`analysis_random_spline.R`](analysis_random_spline.R) additionally need **`lcmm`** (it
+compiles Fortran, so allow a few minutes to install) and `splines`, which ships with R.
 
 The three core R scripts need exactly **`mgcv`, `nlme`, `dplyr`**. Other packages
 (`tidyr`, `lme4`, `here`, `lattice`, `MASS`) are used only by the retired/tutorial
@@ -145,6 +146,7 @@ the raw dataset as described under [Data](#data).
 python3 prepare_monolix_data.py     # raw CSV -> the two derived long CSVs
 Rscript analysis_shoulder.R         # worked example -> figures/00_, 01_, 02_
 Rscript analysis_hlme.R             # iteration 03   -> figures/03_  (needs lcmm, ~95 s)
+Rscript analysis_random_spline.R    # iteration 04   -> figures/04_  (random curve, ~12 min)
 Rscript analyze_all.R               # 72-cell sweep -> figures/generalized/  (long-running)
 Rscript review_response_analysis.R  # reviewer-response evidence, console output only
 ```
@@ -239,6 +241,27 @@ autocorrelation of **0.970 is not modelled**, so those Wald SEs are optimistic. 
 cannot fix it — its decay estimates to zero, making it aliased with the random intercept.
 Details in [`figures/03_natural_spline_hlme/README.md`](figures/03_natural_spline_hlme/README.md).
 
+### And a third: a random curve per shoulder (iteration 04)
+
+[`analysis_random_spline.R`](analysis_random_spline.R) applies the standard `lcmm` remedy —
+the whole spline basis in the random effects, so each shoulder gets its own *curve*:
+
+```r
+hlme(fixed = Y ~ ns(TIME, knots) * cond, random = ~ ns(TIME, knots), ...)
+```
+
+It fixes iteration 03's defect and breaks its guarantee. BIC falls 19,510 → 6,348 and the
+residual autocorrelation stops being a long slow drift, but **excess kurtosis rises from
+1.18 to 12.98** — once the random curve absorbs each shoulder's trajectory, the residuals
+are crumbs, and the normality criterion fails. With shoulders free to differ in shape, the
+difference curve also drops from **4/6 to 2/6** passing Wald terms, confirming that
+iteration 03's standard errors were optimistic.
+
+**No single iteration satisfies both requirements.** What 03 and 04 agree on — a shape
+difference concentrated at low-to-mid elevation, and a level difference at 0° that is not
+distinguishable from zero — is what should be reported. See
+[`figures/04_natural_spline_hlme/README.md`](figures/04_natural_spline_hlme/README.md).
+
 A symbol-by-symbol walkthrough of the equation, written for readers who know splines but
 not statistics, is published here:
 [**Anatomy of a GAMM**](https://claude.ai/code/artifact/6badf04e-b991-41ee-9315-d33627dc1c14).
@@ -257,6 +280,7 @@ latent growth curve modelling was rejected — is in
 | [`prepare_monolix_data.py`](prepare_monolix_data.py) | filters to angular data and reshapes to long format, in one streaming pass | `corrected_confident_data.csv` | `spartacus_angles_long.csv`, `monolix_st_frontal_dof2.csv` |
 | [`analysis_shoulder.R`](analysis_shoulder.R) | the pedagogical worked example: exploration → sigmoid NLME (rejected) → spline mixed model + AR(1) → difference curve → coefficient export | `monolix_st_frontal_dof2.csv` | `figures/00_data_exploration/`, `figures/01_sigmoid_nlme/`, `figures/02_spline_mixed_model/` (figures, `00_results_summary.txt`, `00_coefficients.csv`, `00_variance_components.csv`) |
 | [`analysis_hlme.R`](analysis_hlme.R) | iteration 03: natural spline + `lcmm::hlme`, 12 parameters instead of 64, with a Wald test per coefficient and a residual-normality check | `monolix_st_frontal_dof2.csv` | `figures/03_natural_spline_hlme/` (figures, `00_coefficients.csv`, `00_wald_tests.csv`, `00_model_selection.csv`, `00_thinning.csv`) |
+| [`analysis_random_spline.R`](analysis_random_spline.R) | iteration 04: a random *curve* per shoulder (the whole spline basis in the random effects), with explicit knots; compares three random-effect structures | `monolix_st_frontal_dof2.csv` | `figures/04_natural_spline_hlme/` (figures, `00_variants.csv`, `00_coefficients.csv`, `00_wald_tests.csv`) |
 | [`analyze_all.R`](analyze_all.R) | the same model over all 72 joint × movement × DoF cells, plus one plate per movement and FDR adjustment | `spartacus_angles_long.csv` | `figures/generalized/` (plates, per-cell drill-downs, `00_master_summary.csv`, `00_SUMMARY.md`) |
 | [`review_response_analysis.R`](review_response_analysis.R) | evidence for the reviewer response: study random effect, corrected ρ, signed effect size, leave-one-study-out | `spartacus_angles_long.csv` | console only |
 
