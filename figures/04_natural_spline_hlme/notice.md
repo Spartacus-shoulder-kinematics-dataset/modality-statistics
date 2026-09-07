@@ -1,6 +1,6 @@
 # Notice — how to read the exported values
 
-Column-by-column reference for the six CSVs in this folder. For what the iteration *is* and
+Column-by-column reference for the seven CSVs in this folder. For what the iteration *is* and
 what it found, see [`README.md`](README.md). The equivalent documents for the earlier
 iterations are [`../02_spline_mixed_model/notice.md`](../02_spline_mixed_model/notice.md)
 and [`../03_natural_spline_hlme/notice.md`](../03_natural_spline_hlme/notice.md).
@@ -44,14 +44,14 @@ The decisive table of this iteration: one row per specification tried.
 
 ---
 
-## `00_coefficients.csv` — all 34 parameters of the retained model
+## `00_coefficients.csv` — all 19 parameters of the retained model
 
 | column | what it is |
 | --- | --- |
 | `parameter` | lcmm's internal name, `names(m$best)` |
 | `estimate` | the fitted value |
 | `se` | standard error, `sqrt(diag(VarCov(m)))` |
-| `block` | `fixed_effect` (12) or `variance_component` (22) |
+| `block` | `fixed_effect` (12) or `variance_component` (7) |
 | `wald` | `estimate / se`, fixed effects only |
 
 ### The 12 fixed effects
@@ -67,41 +67,25 @@ data-driven −3.46°, and every `ns()` basis function is zero at the lower boun
 anchored at an extrapolated point and `condin vivo` even changed sign with `df`. Here they
 are interpretable anatomical quantities.
 
-### The 22 variance components — how to read `varcov k`
+### The 7 variance components
 
-`varcov 1 … varcov 21` are the **variance-covariance matrix of the 6 random effects**
-(intercept + 5 basis terms), and `stderr` is the residual sd.
+`varcov 1 … varcov 6` are the **variances of the 6 random effects** (intercept + 5 basis
+terms) and `stderr` is the residual sd. Because the retained model uses `idiag = TRUE`,
+$D$ is diagonal and **no covariances are estimated** — there is one entry per random effect,
+in order, and nothing off-diagonal.
 
-They are **not** a Cholesky factor: `m$best` stores the covariance entries directly
-(verified — `estimates(m, cholesky = FALSE)` returns the identical vector, and `VarCovRE(m)`
-labels them as `Var(...)` / `Cov(...)`). They are the **lower triangle read row by row**:
+For a labelled version with tests, call `VarCovRE(model)` in R.
 
-```
-        b0        b1        b2        b3        b4        b5
-b0   varcov1
-b1   varcov2   varcov3
-b2   varcov4   varcov5   varcov6
-b3   varcov7   varcov8   varcov9   varcov10
-b4   varcov11  varcov12  varcov13  varcov14  varcov15
-b5   varcov16  varcov17  varcov18  varcov19  varcov20  varcov21
-```
-
-So the **variances sit at the triangular numbers** — positions 1, 3, 6, 10, 15, 21 — and
-everything else is a covariance and may legitimately be negative. In the retained fit those
-diagonals are 45.1, 32.4, 59.1, 78.1, 227.9, 459.3, all positive as they must be.
-
-For a labelled version with tests, call `VarCovRE(model)` in R rather than reading the
-numbered entries by hand.
-
-> Under `R2_spline_diag` (`idiag = TRUE`) there are only 6 `varcov` entries, one variance per
-> random effect and no covariances — which is why that variant has 19 parameters against 34.
+> Had the unstructured variant been kept, `varcov` would instead hold the 21 lower-triangle
+> entries of a full 6×6 covariance, read row by row, with variances at positions 1, 3, 6, 10,
+> 15, 21. It was dropped — see the README — so that layout does not arise here.
 
 ---
 
 ## `00_df_sweep.csv` — the diagonal random spline at every df
 
 One row per `K`. Same idea as iteration 03's `00_model_selection.csv`, but the random part
-is `~ns(...)` rather than `~1`, and the structure is diagonal throughout.
+is `~ns(...)` rather than `~1`.
 
 | column | what it is |
 | --- | --- |
@@ -121,8 +105,8 @@ is `~ns(...)` rather than `~1`, and the structure is diagonal throughout.
 
 > **Read `resid_sd` and `kurtosis` together.** They move in lockstep and in opposite
 > directions: as `K` rises the random curve absorbs more of each shoulder's trajectory,
-> `resid_sd` falls 1.108 → 0.437, and `kurtosis` climbs 5.70 → 12.55. `resid_acf1` improves
-> over the same range, so there is no `K` that satisfies both criteria. See the README.
+> `resid_sd` falls 1.108 → 0.437 and `kurtosis` climbs 5.70 → 12.55, while `resid_acf1`
+> improves. There is no `K` satisfying both criteria — see the README.
 
 > **`n_random` is what matters, not `K` alone.** At K = 5 each of the 44 shoulders carries 6
 > random effects — 264 predicted quantities from 3,724 rows.
@@ -169,6 +153,25 @@ differ slightly in standard errors; compare rather than assume.
 Use this file to check whether a conclusion survives the choice of `df` — most individual
 coefficients do not. Only `ns1:condin vivo` passes at every df, and `condin vivo` fails at
 every df.
+
+---
+
+## `00_overlap_trim.csv` — full range vs trimmed to the x-overlap
+
+Two rows, **the same model** — K = 5, interior knots 40/70/100/130, boundary knots 0/160 —
+fitted on the full thinned data and on the subset where **both** conditions have data.
+Only the data differs; the basis is identical, so the comparison is single-factor.
+
+| column | what it is |
+| --- | --- |
+| `setting` | `full range` or `trimmed to overlap` |
+| `x_lo`, `x_hi` | the elevation range fitted |
+| `n_rows` | rows in that fit |
+| `resid_sd`, `kurtosis`, `resid_acf1` | the residual diagnostics to compare |
+
+> **BIC is deliberately absent.** The two rows are *different datasets*, so their likelihoods
+> are not comparable and a BIC column would invite exactly the wrong comparison. Only the
+> residual diagnostics can be read across the rows.
 
 ---
 

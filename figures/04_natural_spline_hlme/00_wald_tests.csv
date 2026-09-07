@@ -1,13 +1,13 @@
 "curve","term","estimate","se","wald","p_value","passed"
-"reference (ex vivo)","intercept",0.83392,1.96756,0.423834597166033,0.67169,FALSE
-"reference (ex vivo)","ns1",-8.52316,1.68795,-5.0494149708226,0,TRUE
-"reference (ex vivo)","ns2",-19.02897,2.23906,-8.49864228738846,0,TRUE
-"reference (ex vivo)","ns3",-43.27837,2.49255,-17.3630900082245,0,TRUE
-"reference (ex vivo)","ns4",-55.22721,4.85114,-11.3843776926661,0,TRUE
-"reference (ex vivo)","ns5",-48.78046,6.65288,-7.33223205589158,0,TRUE
-"difference (in vivo - ex vivo)","condin vivo",-4.0613,2.31165,-1.75688361127333,0.07894,FALSE
-"difference (in vivo - ex vivo)","ns1:condin vivo",-13.82029,1.97727,-6.98958159482519,0,TRUE
-"difference (in vivo - ex vivo)","ns2:condin vivo",-12.35297,2.63636,-4.68561577326314,0,TRUE
-"difference (in vivo - ex vivo)","ns3:condin vivo",5.16133,2.95709,1.74540849280881,0.08091,FALSE
-"difference (in vivo - ex vivo)","ns4:condin vivo",-0.76513,5.60175,-0.13658767349489,0.89136,FALSE
-"difference (in vivo - ex vivo)","ns5:condin vivo",4.28629,7.74317,0.553557522306755,0.57988,FALSE
+"reference (ex vivo)","intercept",0.86351,1.88686,0.457643916347795,0.64721,FALSE
+"reference (ex vivo)","ns1",-8.57618,1.53367,-5.59193307556384,0,TRUE
+"reference (ex vivo)","ns2",-19.08944,1.90533,-10.0189678428409,0,TRUE
+"reference (ex vivo)","ns3",-43.19465,2.36013,-18.3018096460788,0,TRUE
+"reference (ex vivo)","ns4",-56.64164,3.55315,-15.9412464995849,0,TRUE
+"reference (ex vivo)","ns5",-51.00996,4.84778,-10.5223339342957,0,TRUE
+"difference (in vivo - ex vivo)","condin vivo",-4.11485,2.22177,-1.8520593940867,0.06402,FALSE
+"difference (in vivo - ex vivo)","ns1:condin vivo",-13.74971,1.79922,-7.64203932815331,0,TRUE
+"difference (in vivo - ex vivo)","ns2:condin vivo",-12.25488,2.24065,-5.46934148572959,0,TRUE
+"difference (in vivo - ex vivo)","ns3:condin vivo",5.06611,2.8021,1.80796902323258,0.07061,FALSE
+"difference (in vivo - ex vivo)","ns4:condin vivo",0.79307,4.03748,0.196426979204851,0.84428,FALSE
+"difference (in vivo - ex vivo)","ns5:condin vivo",6.6755,5.57752,1.19685810180869,0.23136,FALSE

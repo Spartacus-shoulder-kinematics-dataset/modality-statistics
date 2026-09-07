@@ -3,8 +3,8 @@
 Two things live here:
 
 1. **The worked example** (`00_data_exploration/`, `01_sigmoid_nlme/`,
-   `02_spline_mixed_model/`, `03_natural_spline_hlme/`, `04_natural_spline_hlme/`) — the
-   deep, pedagogical single-subset analysis, kept as iteration sets (see below).
+   `02_spline_mixed_model/`, `03_natural_spline_hlme/`, `04_natural_spline_hlme/`, `05_bootstrap/`) — the deep,
+   pedagogical single-subset analysis, kept as iteration sets (see below).
 2. **`generalized/`** — the same model applied to **every** joint x movement x
    DoF, with one **planche per movement**. See
    [`generalized/00_SUMMARY.md`](generalized/00_SUMMARY.md).
@@ -200,8 +200,28 @@ curve drops from **4/6 to 2/6** passing Wald terms — iteration 03's standard e
 optimistic, as it had warned. What survives in both is a shape difference at low-to-mid
 elevation; the level difference at 0° is −4.06° ± 2.31 and not distinguishable from zero.
 
-> For the 72-cell sweep use the **diagonal** variant `R2_spline_diag`: the unstructured one
-> costs 40× the runtime (659 s vs 16 s) for 101 BIC units and an identical ACF.
+Two follow-ups came out of it. **The unstructured covariance was dropped** — 40× the runtime
+(659 s vs 17 s) for 101 BIC units and an identical ACF — so the retained model has 19
+parameters with a diagonal *D*. And **trimming to the x-overlap is the best single lever on
+the kurtosis found anywhere**: restricting to the range where both conditions have data
+(here [14°, 150°], computed from the data so it carries to the other 71 cells) keeps 90.7% of
+rows and takes excess kurtosis from **12.55 to 5.25** with the autocorrelation unchanged —
+at an unchanged model (K = 5, same knots), so only the data differs. Narrowing the
+*boundary knots* instead makes it worse (12.55 → 14.84): that changes the basis, not which
+points are fitted. It halves the problem; it does not solve it.
+
+---
+
+## `05_bootstrap/` — planned, not implemented
+
+A design note only — no script, no outputs. See
+[`05_bootstrap/README.md`](05_bootstrap/README.md).
+
+Iterations 03 and 04 reach an impasse that no further modelling choice resolves: model-based
+standard errors need assumptions the diagnostics reject, and every test so far is
+pseudo-replicated because condition is confounded with source study. A **study-level
+bootstrap** — resampling the 17 studies, not the 44 shoulders and never the rows — fixes both
+with one mechanism, and gives the stable ~10° effect size the interval it currently lacks.
 
 ---
 

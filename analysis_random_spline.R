@@ -48,6 +48,35 @@ fig <- function(name, expr, w = 1100, h = 750, res = 130) {
   on.exit(dev.off()); force(expr); message("  saved ", file.path(S4, name))
 }
 
+# Knots are PHYSICAL positions on the elevation axis, not an abstract tuning knob,
+# so mark them as such rather than as rug ticks:
+#   dashed vertical  = interior knot — where the piecewise cubics join
+#   dotted vertical  = boundary knot — where the spline is forced linear beyond
+#   filled dot       = the fitted value AT that knot, on each curve
+# The dots are the informative half: they tie a knot to the trajectory it shapes.
+knot_marks <- function(interior, boundary = NULL, curves = NULL, colmap = COL,
+                       xvar = "x", yvar = "fit", byvar = "cond", cex = 1.1) {
+  usr <- par("usr")
+  ik <- interior[interior > usr[1] & interior < usr[2]]
+  if (length(ik)) abline(v = ik, lty = 2, lwd = 1, col = adjustcolor("grey35", 0.55))
+  if (!is.null(boundary)) {
+    bk <- boundary[boundary > usr[1] & boundary < usr[2]]
+    if (length(bk)) abline(v = bk, lty = 3, lwd = 1.3, col = adjustcolor("grey15", 0.6))
+  }
+  if (!is.null(curves) && length(ik)) {
+    grps <- if (byvar %in% names(curves)) unique(curves[[byvar]]) else NA
+    for (g in grps) {
+      cc <- if (is.na(g)) curves else curves[curves[[byvar]] == g, ]
+      cc <- cc[order(cc[[xvar]]), ]
+      inside <- ik >= min(cc[[xvar]]) & ik <= max(cc[[xvar]])
+      if (!any(inside)) next
+      yy <- approx(cc[[xvar]], cc[[yvar]], xout = ik[inside])$y
+      col <- if (is.na(g)) BLUE else colmap[[as.character(g)]]
+      points(ik[inside], yy, pch = 21, bg = col, col = "white", cex = cex, lwd = 1.2)
+    }
+  }
+}
+
 # -----------------------------------------------------------------------------
 # 1. LOAD + THIN (identical to iteration 03, so the two are comparable)
 # -----------------------------------------------------------------------------
@@ -207,8 +236,11 @@ fig("01_population_curves_by_condition.png", {
   for (cc in unique(curves$cond)) { g <- curves[curves$cond == cc, ]
     polygon(c(g$x, rev(g$x)), c(g$lo, rev(g$hi)), col = adjustcolor(COL[cc], 0.3), border = NA)
     lines(g$x, g$fit, col = COL[cc], lwd = 3) }
-  rug(KNOTS, lwd = 2, col = "grey30", ticksize = 0.03)
+  knot_marks(KNOTS, BOUNDARY, curves)
   legend("topleft", names(COL), col = COL, lwd = 3, bty = "n")
+  mtext(sprintf("knots: %s  (dashed) | boundary %s (dotted); dots = fitted value at each knot",
+                paste(KNOTS, collapse=", "), paste(BOUNDARY, collapse="-")),
+        side = 3, cex = 0.7, line = 0.2, col = "grey30")
   legend("bottomright", bty = "n", cex = 0.85,
          legend = c(sprintf("Wald |coef/se| >= %.2f", WALD_CRIT),
                     sprintf("reference : %s", ref_lab), sprintf("difference: %s", diff_lab)))
@@ -224,6 +256,7 @@ fig("02_difference_invivo_minus_exvivo.png", {
        main = "Estimated difference +/- 95% CI (overlap only)")
   polygon(c(xd, rev(xd)), c(dif$lo, rev(dif$hi)), col = adjustcolor(BLUE, 0.25), border = NA)
   lines(xd, dif$fit, lwd = 3, col = BLUE); abline(h = 0, lty = 2, col = "grey40")
+  knot_marks(KNOTS, BOUNDARY, data.frame(x = xd, fit = dif$fit), byvar = "none")
   legend("topleft", bty = "n", cex = 0.9,
          legend = c(sprintf("mean |difference| = %.2f deg", mean(abs(dif$fit))),
                     sprintf("overlap: %.0f .. %.0f deg", ov[1], ov[2])))
@@ -240,7 +273,8 @@ fig("03_diagnostics.png", {
        main = sprintf("skew %.2f | kurtosis %.2f", nstat["skew"], nstat["kurtosis"]))
   curve(dnorm(x), add = TRUE, col = "red", lwd = 2)
   plot(dt$TIME, res, pch = 16, cex = 0.4, col = adjustcolor(COL[as.character(dt$cond)], 0.35),
-       xlab = "elevation (x)", ylab = "residual", main = "Residuals vs x"); abline(h = 0, col = "red")
+       xlab = "elevation (x)", ylab = "residual", main = "Residuals vs x")
+  knot_marks(KNOTS, BOUNDARY); abline(h = 0, col = "red")
 })
 
 # every random effect, not just the intercept
@@ -280,6 +314,100 @@ fig("06_variant_comparison.png", {
                  ylab = "BIC (lower is better)", main = "BIC")
   text(bp2, o$BIC, round(o$BIC), pos = 3, xpd = TRUE, cex = 0.85)
 })
+
+# -----------------------------------------------------------------------------
+# 4a. DOES TRIMMING TO THE x-OVERLAP RESCUE THE RESIDUAL NORMALITY?
+#
+#     Outside the range where BOTH conditions have data, one condition's curve is
+#     pure extrapolation and nothing constrains it — a natural home for the
+#     extreme residuals driving the kurtosis. Trimming removes those points
+#     rather than merely re-describing them. (Moving the BOUNDARY KNOTS would
+#     not do this: that changes the basis, not which points are fitted.)
+#
+#     The range is computed from the data, never hard-coded, so this carries
+#     unchanged to the other 71 joint x motion x DoF cells, whose overlaps differ.
+#
+#     NOTE: BIC is NOT comparable between the trimmed and untrimmed fits — they
+#     are different datasets. Only the residual diagnostics are comparable.
+# -----------------------------------------------------------------------------
+overlap_range <- function(df, xvar = "TIME", byvar = "cond") {
+  rr <- tapply(df[[xvar]], droplevels(df[[byvar]]), range)
+  c(max(sapply(rr, `[`, 1)), min(sapply(rr, `[`, 2)))
+}
+ovr <- overlap_range(dt)
+dtr <- dt[dt$TIME >= ovr[1] & dt$TIME <= ovr[2], ]
+dtr$ID <- droplevels(dtr$ID); dtr$IDnum <- as.integer(dtr$ID)
+
+cat("\n================ x-OVERLAP TRIM ================\n")
+cat(sprintf("overlap of the two conditions: %.1f .. %.1f deg\n", ovr[1], ovr[2]))
+cat(sprintf("rows %d -> %d (%.1f%% kept) | shoulders %d -> %d\n",
+            nrow(dt), nrow(dtr), 100*nrow(dtr)/nrow(dt),
+            nlevels(dt$ID), nlevels(dtr$ID)))
+cat(sprintf("model: UNCHANGED — K = %d, interior knots %s, boundary %s\n",
+            K, paste(KNOTS, collapse=","), paste(BOUNDARY, collapse=",")))
+
+# SAME basis as the full-range fit — same K, same interior knots, same boundary
+# knots. Only the DATA changes, so the comparison below is a single-factor test.
+# (Moving the boundary knots to the overlap as well was tried and is worse:
+#  on the full data it takes kurtosis 12.55 -> 14.84, and on the trimmed data
+#  5.25 -> 5.51. Forcing linearity over observed data hurts the tails.)
+Btr <- ns(dtr$TIME, knots = KNOTS, Boundary.knots = BOUNDARY)
+nstr <- paste0("ns", 1:ncol(Btr))
+for (j in seq_along(nstr)) dtr[[nstr[j]]] <- Btr[, j]
+ftr <- as.formula(paste("Y ~", paste(nstr, collapse=" + "), "+ cond +",
+                        paste(paste0("cond:", nstr), collapse=" + ")))
+rtr <- as.formula(paste("~", paste(nstr, collapse = " + ")))
+
+t0 <- Sys.time()
+m_tr <- try(hlme(fixed = ftr, random = rtr, subject = "IDnum", ng = 1, idiag = TRUE,
+                 data = dtr, verbose = FALSE, nproc = NPROC), silent = TRUE)
+tr_secs <- as.numeric(difftime(Sys.time(), t0, units = "secs"))
+trim_note <- if (inherits(m_tr, "try-error") || m_tr$conv != 1) {
+  "trimmed fit did not converge."
+} else {
+  rt <- m_tr$pred$resid_ss; nst <- norm_stats(rt)
+  full <- vt[vt$variant == "R2_spline_diag", ]
+  sprintf(paste0(
+    "trimmed to %.1f-%.1f deg (%d rows, %.0f%% kept), converged in %.0f s\n",
+    "                     full range      trimmed\n",
+    "  resid sd           %8.3f     %8.3f\n",
+    "  excess kurtosis    %8.2f     %8.2f\n",
+    "  skew               %8.2f     %8.2f\n",
+    "  lag-1 resid ACF    %8.3f     %8.3f\n",
+    "  (BIC not comparable: different datasets)"),
+    ovr[1], ovr[2], nrow(dtr), 100*nrow(dtr)/nrow(dt), tr_secs,
+    full$resid_sd, sd(rt), full$kurtosis, nst["kurtosis"],
+    full$skew, nst["skew"], full$resid_acf1, acf_within1(rt, dtr$IDnum))
+}
+cat(trim_note, "\n")
+write.csv(data.frame(
+  setting = c("full range", "trimmed to overlap"),
+  x_lo = c(min(dt$TIME), ovr[1]), x_hi = c(max(dt$TIME), ovr[2]),
+  n_rows = c(nrow(dt), nrow(dtr)),
+  resid_sd = c(vt$resid_sd[vt$variant=="R2_spline_diag"],
+               if (inherits(m_tr,"try-error")) NA else sd(m_tr$pred$resid_ss)),
+  kurtosis = c(vt$kurtosis[vt$variant=="R2_spline_diag"],
+               if (inherits(m_tr,"try-error")) NA else norm_stats(m_tr$pred$resid_ss)["kurtosis"]),
+  resid_acf1 = c(vt$resid_acf1[vt$variant=="R2_spline_diag"],
+                 if (inherits(m_tr,"try-error")) NA else acf_within1(m_tr$pred$resid_ss, dtr$IDnum))),
+  file.path(OUT, "00_overlap_trim.csv"), row.names = FALSE)
+
+if (!inherits(m_tr, "try-error") && m_tr$conv == 1) {
+  fig("13_overlap_trim_diagnostics.png", {
+    op <- par(mfrow = c(2, 2), mar = c(4, 4, 3, 1)); on.exit(par(op), add = TRUE)
+    for (nm in c("full range", "trimmed to overlap")) {
+      rr2 <- if (nm == "full range") m$pred$resid_ss else m_tr$pred$resid_ss
+      zz <- (rr2 - mean(rr2))/sd(rr2); ks <- mean(zz^4) - 3
+      qqnorm(zz, pch = 16, cex = 0.35, col = adjustcolor("grey20", 0.3),
+             main = sprintf("%s — Q-Q", nm))
+      qqline(zz, col = "red", lwd = 2)
+      hist(zz, breaks = 60, freq = FALSE, border = NA, col = "grey80",
+           xlab = "standardised residual",
+           main = sprintf("%s — kurtosis %.2f", nm, ks))
+      curve(dnorm(x), add = TRUE, col = "red", lwd = 2)
+    }
+  }, w = 1200, h = 850, res = 130)
+}
 
 # -----------------------------------------------------------------------------
 # 4b. df SWEEP — does a smaller basis rescue the residual normality?
@@ -386,7 +514,7 @@ fig("07_by_df_population_curves.png", {
     for (cn in unique(ck$cond)) { g <- ck[ck$cond == cn, ]
       polygon(c(g$x, rev(g$x)), c(g$lo, rev(g$hi)), col = adjustcolor(COL[cn], 0.30), border = NA)
       lines(g$x, g$fit, col = COL[cn], lwd = 2.6) }
-    rug(e$knots, lwd = 2, col = "grey30", ticksize = 0.035)
+    knot_marks(e$knots, BOUNDARY, ck, cex = 0.95)
     if (kk == K) { box(lwd = 2.5, col = BLUE)
       legend("bottomleft", "RETAINED df", bty = "n", cex = 0.8, text.col = BLUE, text.font = 2) }
     if (kk == KS[1]) legend("topleft", names(COL), col = COL, lwd = 2.6, bty = "n", cex = 0.8)
@@ -413,7 +541,8 @@ fig("08_by_df_difference.png", {
     polygon(c(z$x, rev(z$x)), c(z$lo, rev(z$hi)), col = adjustcolor(BLUE, 0.25), border = NA)
     abline(h = 0, lty = 2, col = "grey40"); lines(z$x, z$fit, lwd = 2.6, col = BLUE)
     if (any(sig)) points(z$x[sig], rep(ylim4[1], sum(sig)), pch = 15, cex = 0.35, col = BLUE)
-    rug(swfit[[as.character(kk)]]$knots, lwd = 2, col = "grey30", ticksize = 0.035)
+    knot_marks(swfit[[as.character(kk)]]$knots, BOUNDARY,
+               data.frame(x = z$x, fit = z$fit), byvar = "none", cex = 0.95)
     if (kk == K) { box(lwd = 2.5, col = BLUE)
       legend("bottomright", "RETAINED df", bty = "n", cex = 0.8, text.col = BLUE, text.font = 2) }
     if (kk == KS[1]) legend("topleft", "band excludes 0", bty = "n", cex = 0.75,
@@ -537,6 +666,8 @@ print(swt, digits = 4)
 cat("\nWALD PASSED PER CURVE, PER df (see 00_wald_tests_by_df.csv for every coefficient):\n")
 print(swt[, c("K","n_random","wald_pass_ref","wald_total_ref",
               "wald_pass_diff","wald_total_diff")], row.names = FALSE)
+cat("\nx-OVERLAP TRIM (does removing the extrapolated tails rescue normality?):\n")
+cat(trim_note, "\n")
 cat("\nNOTE ON gamma_0: the boundary knot is at 0 deg, so 'condin vivo' is now the\n")
 cat("  in-vivo minus ex-vivo difference AT 0 deg of elevation — an interpretable\n")
 cat("  quantity, unlike iteration 03 where the basis vanished at -3.46 deg.\n")

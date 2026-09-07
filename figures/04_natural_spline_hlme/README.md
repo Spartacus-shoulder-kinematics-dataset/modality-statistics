@@ -4,7 +4,7 @@ Produced by [`../../analysis_random_spline.R`](../../analysis_random_spline.R).
 
 ```bash
 python3 prepare_monolix_data.py
-Rscript analysis_random_spline.R      # ~13 min (R3 dominates the runtime)
+Rscript analysis_random_spline.R      # ~1 min 50 s
 ```
 
 For what each CSV column means, see [`notice.md`](notice.md).
@@ -73,14 +73,20 @@ its own *shape*, not merely its own height.
 
 | variant | random part | params | BIC | lag-1 ACF | resid sd | kurtosis | Wald | time |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | :--- | ---: |
-| `R1_intercept` | `~1` (iteration 03) | 14 | 19510 | **0.978** | 3.170 | **1.18** | 8/12 | 11 s |
-| `R2_spline_diag` | `~ns(…)`, diagonal | 19 | 6449 | 0.836 | 0.437 | 12.55 | 7/12 | 16 s |
-| `R3_spline_unstr` | `~ns(…)`, unstructured | 34 | **6348** | **0.835** | 0.433 | **12.98** | 7/12 | 659 s |
+| `R1_intercept` | `~1` (iteration 03) | 14 | 19510 | **0.978** | 3.170 | **1.18** | 8/12 | 12 s |
+| **`R2_spline_diag`** | **`~ns(…)`, diagonal** | **19** | **6449** | **0.836** | **0.437** | **12.55** | **7/12** | **17 s** |
+
+**The unstructured variant has been dropped.** It cost 40× the runtime (659 s vs 17 s) for
+101 BIC units, a lag-1 ACF identical to three decimals (0.8352 vs 0.8356) and a *slightly
+worse* kurtosis (12.98 vs 12.55) — and 21 covariance parameters estimated from 44 shoulders
+was never comfortable. The off-diagonal covariances of $D$ are therefore not estimated: the
+retained model has **19 parameters** (12 fixed + 6 variances + 1 residual sd). The
+basis-dependence caveat in the section below is the price of that choice, accepted knowingly.
 
 ### What improved — a great deal
 
 The random curve is unambiguously the better description of the data. **BIC drops from
-19,510 to 6,348**, and the residual sd falls from 3.17° to 0.43°: most of what iteration 03
+19,510 to 6,449**, and the residual sd falls from 3.17° to 0.43°: most of what iteration 03
 called "residual" was in fact each shoulder's own trajectory shape.
 
 The autocorrelation headline number, 0.978 → 0.836, badly *undersells* the improvement.
@@ -92,7 +98,7 @@ size, has collapsed even though lag-1 is still high.
 
 ### What broke — the acceptance criterion
 
-**Residual excess kurtosis goes from 1.18 to 12.98.** `03_diagnostics.png` shows it plainly:
+**Residual excess kurtosis goes from 1.18 to 12.55.** `03_diagnostics.png` shows it plainly:
 the histogram is a needle at zero, and the Q-Q plot is severely S-shaped with residuals
 reaching ±10 standard deviations.
 
@@ -108,7 +114,7 @@ within-curve correlation be modelled **pull against each other** here:
 | | autocorrelation handled | residuals normal |
 | --- | :---: | :---: |
 | iteration 03 (`~1`) | ✗ (ACF 0.978) | ✓ (kurtosis 1.18) |
-| iteration 04 (`~ns`) | mostly ✓ (short-range) | ✗ (kurtosis 12.98) |
+| iteration 04 (`~ns`) | mostly ✓ (short-range) | ✗ (kurtosis 12.55) |
 
 ### Does a smaller basis rescue the normality? No.
 
@@ -301,16 +307,79 @@ comparable by likelihood ratio.
 > basis is written. That is the real argument for unstructured — not fit, but that the
 > assumption means the same thing regardless of parametrisation.
 
-### Diagonal or unstructured?
+### Does trimming to the x-overlap rescue the normality? Partly — and it is the best lever found
 
-BIC selects `R3_spline_unstr`, and the script follows BIC, so every other output here is R3.
-But that is a thin win: **101 BIC units for 15 extra parameters and 40× the runtime**
-(659 s vs 16 s), for a lag-1 ACF identical to three decimals (0.8352 vs 0.8356) and a
-*slightly worse* kurtosis. On 44 shoulders, an unstructured 6×6 covariance is 21 parameters
-estimated from 44 units.
+**The model is unchanged for this test: K = 5, interior knots 40/70/100/130, boundary knots
+0/160 — identical to the retained fit above. Only the *data* changes**, so this is a
+single-factor comparison.
 
-**For the 72-cell sweep, use `R2_spline_diag`.** R3 is not worth 40× the compute for a
-difference you cannot see in any figure.
+Outside the range where **both** conditions have data, one condition's curve is pure
+extrapolation and nothing constrains it — a natural home for the extreme residuals. Trimming
+there *removes* candidate outliers instead of merely re-describing them.
+
+The range is computed from the data, never hard-coded, so this carries unchanged to the
+other 71 cells whose overlaps differ:
+
+```r
+overlap_range <- function(df, xvar = "TIME", byvar = "cond") {
+  rr <- tapply(df[[xvar]], droplevels(df[[byvar]]), range)
+  c(max(sapply(rr, `[`, 1)), min(sapply(rr, `[`, 2)))
+}
+```
+
+Here that gives **[14.0°, 150.0°]** — ex vivo spans 14–150, in vivo −3.5–187 — keeping
+**90.7% of rows and all 44 shoulders**. `00_overlap_trim.csv`,
+`13_overlap_trim_diagnostics.png`:
+
+| | full range | trimmed to overlap |
+| --- | ---: | ---: |
+| rows | 3,724 | 3,378 |
+| residual sd | 0.437 | 0.304 |
+| skew | −0.44 | **+0.20** |
+| **excess kurtosis** | **12.55** | **5.25** |
+| lag-1 residual ACF | 0.836 | 0.837 |
+
+**Kurtosis is more than halved, skew is essentially fixed, and the autocorrelation is
+unchanged.** Losing 9% of rows costs nothing measurable and buys the single largest
+improvement in residual behaviour found anywhere in this iteration. It should be the default
+for the generalised sweep.
+
+#### Trimming the data, not moving the boundary knots
+
+These are two different operations and it is worth keeping them apart, since narrowing the
+boundary knots looks superficially like the same idea. Boundary knots change the **basis**
+— they decide where the spline is forced to become linear. Trimming changes **which points
+are fitted**. Fitting all four combinations separates them:
+
+| | data | boundary knots | residual sd | skew | excess kurtosis |
+| --- | --- | --- | ---: | ---: | ---: |
+| A | full | 0/160 | 0.437 | −0.44 | 12.55 |
+| B | full | 14/150 | 0.452 | −0.55 | **14.84** |
+| C | trimmed | 14/150 | 0.305 | +0.23 | 5.51 |
+| **D** | **trimmed** | **0/160** | **0.304** | **+0.20** | **5.25** |
+
+**A → B isolates the boundary-knot move, and it makes things worse** (12.55 → 14.84):
+forcing the curve to be linear over observed data adds misfit exactly where the data is
+sparsest. **The trim does all the work**, and does slightly more of it when the boundary
+knots are left where they were (D beats C). So the script trims the data and leaves the
+basis alone — configuration **D**.
+
+For the generalised sweep the same rule applies: derive the boundary knots from each cell's
+*untrimmed* range, then trim the data to the overlap. Do not tie the boundary knots to the
+overlap.
+
+#### What it does not fix
+
+One nuance worth recording, because it refines the mechanism described earlier: **the
+residual sd got *smaller* (0.437 → 0.304) while the kurtosis improved.** So this is not
+simply "less absorbed ⇒ better tails". Two distinct things drive the kurtosis —
+over-absorption by the random curve, and unconstrained extrapolation beyond the overlap —
+and only the second is fixable this cheaply.
+
+At 5.25 the residuals remain far from the ≈1.1 of iteration 03, so the conclusion above
+stands: the standard errors should not be asked to rely on normality. Combined with `K = 2`
+(which reached 5.70 on the full range) it suggests the floor for this model family is
+somewhere near 5, not near 1.
 
 ---
 
@@ -338,6 +407,33 @@ so all of this is descriptive, not causal — see
 
 ---
 
+## How the knots are drawn
+
+The knots are **physical positions on the elevation axis** — 40°, 70°, 100°, 130° of
+thoracohumeral elevation — not an abstract tuning constant, so every figure with elevation
+on the x-axis marks them the same way:
+
+| mark | meaning |
+| --- | --- |
+| **dashed vertical** | an **interior knot** — where two piecewise cubics join |
+| **dotted vertical** | a **boundary knot** (0°, 160°) — beyond which the natural spline is forced linear |
+| **filled dot on a curve** | the **fitted value at that knot**, one per condition |
+
+The dots are the informative half: they tie each knot to the trajectory value it shapes, so
+you can see directly which part of the rhythm a given basis function is responsible for. In
+`01_population_curves_by_condition.png` the ex-vivo curve carries dots only up to 130°
+because its data stops at 150° — a dot is drawn only where that condition actually has a
+fitted curve.
+
+In `07_by_df_population_curves.png` and `08_by_df_difference.png` each panel shows **its
+own** knots (90 for K = 2, 60/110 for K = 3, and so on), which makes the effect of adding
+basis functions legible as a change in where the curve is allowed to bend. The boundary
+knots stay at 0/160 in every panel — they are a property of the basis, not of the df.
+
+`03_diagnostics.png` marks the knots on its *residuals vs x* panel too, without dots: it is
+worth checking whether residual structure lines up with knot positions, since that would
+indicate the basis is placed badly rather than merely being too small.
+
 ## The files
 
 | file | what it is |
@@ -345,7 +441,7 @@ so all of this is descriptive, not causal — see
 | `00_results_summary.txt` | human-readable digest |
 | `00_variants.csv` | **the decisive table** — the three random-effect specifications compared |
 | `00_df_sweep.csv` | the df sweep: K = 2…5 with the diagonal random spline, ACF / residual sd / kurtosis per K |
-| `00_coefficients.csv` | all 34 parameters of the retained model with SE and Wald |
+| `00_coefficients.csv` | all 19 parameters of the retained model with SE and Wald |
 | `00_wald_tests.csv` | the retained model's 12 fixed effects, grouped by curve, with pass/fail |
 | `00_wald_tests_by_df.csv` | the same, for **every** df — with `K` and `retained_df` columns |
 | `01_population_curves_by_condition.png` | fitted curves with 95% bands, knots rugged, Wald counts |
