@@ -148,11 +148,25 @@ Rscript analysis_shoulder.R         # worked example -> figures/00_, 01_, 02_
 Rscript analysis_hlme.R             # iteration 03   -> figures/03_  (needs lcmm, ~95 s)
 Rscript analysis_random_spline.R    # iteration 04   -> figures/04_  (random curve, ~12 min)
 Rscript analyze_all.R               # 72-cell sweep -> figures/generalized/  (long-running)
+Rscript analyze_all_v2.R            # 72-cell sweep -> figures/generalized_v2/ (~12 min)
 Rscript review_response_analysis.R  # reviewer-response evidence, console output only
 ```
 
 `analyze_all.R` fits a GAMM per cell over the 97 MB long file; expect it to run for a
 while and to rewrite every PNG under `figures/generalized/`.
+
+`analyze_all_v2.R` is a wrapper over two halves that can be run separately — the point
+being that you never refit just to move a label:
+
+```bash
+Rscript analyze_all_v2_fit.R        # ~12 min — fits 63 hlme models, writes the cache
+Rscript analyze_all_v2_figures.R    # seconds — redraws all 16 plates from the cache
+```
+
+The fit stores everything the figures need in `figures/generalized_v2/cache/v2_fit.rds`,
+which is **untracked** — a fresh clone needs the raw data and one fit run before any v2
+figure can be rebuilt. Constants shared by both halves live in `analyze_all_v2_common.R`;
+change them there and the figure script will warn you that the cache is stale.
 
 The scripts create their own `figures/` subdirectories, but they do **not** regenerate the
 hand-written [`figures/README.md`](figures/README.md) — keep that file if you ever

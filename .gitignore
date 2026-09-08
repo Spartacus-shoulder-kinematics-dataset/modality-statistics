@@ -32,6 +32,11 @@ vignettes/*.pdf
 *_cache/
 /cache/
 
+# Fit cache for the v2 sweep. Derived from spartacus_angles_long.csv, which is
+# itself untracked — rebuild with `Rscript analyze_all_v2_fit.R` (~12 min).
+# The /cache/ rule above is root-anchored and does NOT match this path.
+figures/generalized_v2/cache/
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md

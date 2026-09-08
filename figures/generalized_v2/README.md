@@ -7,6 +7,23 @@ python3 prepare_monolix_data.py
 Rscript analyze_all_v2.R
 ```
 
+**Fitting and drawing are separate scripts.** The sweep fits 63 `hlme` models (~12 min);
+drawing the 16 plates takes seconds. The fit writes everything the figures need — curves,
+differences, knots, the raw scatter, and the fixed-effect coefficients with their
+covariance — to `cache/v2_fit.rds`, so changing a colour, a label or a layout never costs
+a refit:
+
+```bash
+Rscript ../../analyze_all_v2_fit.R        # ~12 min — only when the MODEL changes
+Rscript ../../analyze_all_v2_figures.R    # seconds — as often as you like
+```
+
+`cache/` is **untracked**, and so is `spartacus_angles_long.csv`: a fresh clone has to
+download the raw data and run the fit once before any plate here can be rebuilt. The
+committed CSVs and figures are the durable record. Constants shared by the two halves live
+in [`../../analyze_all_v2_common.R`](../../analyze_all_v2_common.R) — edit `KDF` or `CAP`
+there and the figure script warns that the cache no longer matches, naming the field.
+
 [`00_SUMMARY.md`](00_SUMMARY.md) carries the model equation, the full glyph key and the
 per-cell results table. This file is the orientation: what changed from v1, what the three
 summary plates are for, and what the sweep actually found.
@@ -54,6 +71,7 @@ Two rules are applied per cell and both matter:
 | --- | --- | --- |
 | [`00_forest.png`](00_forest.png) | degrees of difference | **how much** does each cell differ, and how certain |
 | [`00_significance_map.png`](00_significance_map.png) | thoracohumeral elevation | **where in the movement** it differs, and over what fraction of the range |
+| [`00_sigmap_elevation.png`](00_sigmap_elevation.png) | thoracohumeral elevation | does the difference on one DoF **depend on the plane** the arm moves in |
 | `planche_<motion>` / `planche_diff_<motion>` | elevation | the curves and the difference themselves, 4 joints × 3 DoF |
 
 On the forest, the **wide pale band** is the range the difference covers across elevation
@@ -87,6 +105,42 @@ elevation is highly significant (joint p = 2.4e-14) with a mean difference of 2.
 separable from zero over only 9% of the range.** Statistically solid, biomechanically
 negligible — the joint test is answering "is it exactly zero", which with this much data it
 almost never is.
+
+### Grouping by DoF instead of by motion — and the two holes it exposes
+
+`00_significance_map` orders its rows motion → joint → DoF, which scatters the three
+elevation planes of a given joint × DoF across the whole plate. The DoF-grouped plates
+invert that nesting — rows are joint × DoF, the planes are the inner axis — so the question
+*"does this DoF's difference depend on which plane the arm moves in?"* can be read off three
+adjacent rows on one shared abscissa:
+
+| plate | groups | inner rows |
+| --- | --- | --- |
+| `00_sigmap_poc_scapulothoracic_dof2` | one — the worked example | frontal / scapular / sagittal |
+| `00_sigmap_elevation` | all 12 joint × DoF | frontal / scapular / sagittal |
+| `00_sigmap_rotation` | all 12 joint × DoF | IER 0° / IER 90° |
+
+Each row carries the **ex-vivo and in-vivo coverage separately** (orange above, green below)
+around the **fitted overlap** they intersect to — so the reader sees not just where the
+conditions differ but how much of each condition's range was thrown away to compare them at
+all. Beside the map, the mean difference with its 95% CI, then FDR stars and the γ strip.
+
+Laying the planes out this way makes two structural gaps impossible to miss, and **both are
+findings rather than plotting failures**:
+
+- **Scapular plane elevation has no compared cell anywhere in the sweep.** Every scapular
+  cell has ≤ 2 ex-vivo shoulders against `MIN_PER_COND = 3` — scapulothoracic is 2 ex-vivo
+  (from 2 studies) against 49 in-vivo, sternoclavicular 1 against 25, glenohumeral 0
+  against 21. The middle row of every group on the elevation plate is therefore a
+  placeholder saying so.
+- **Internal-external rotation at 90° abducted has no ex-vivo shoulder in any joint.** Only
+  IER 0° compares, and only at scapulothoracic and glenohumeral (the two proximal joints
+  have 2 in-vivo shoulders, below `MIN_TOTAL`). The 90° rows are kept deliberately: a row
+  that says "no ex-vivo data" is more honest than a motion silently absent from the plate.
+
+Neither is fixed by lowering the threshold. A 2-shoulder, 2-study ex-vivo arm would not
+support the random-curve model, and it would change the BH-FDR adjustment for all 33
+genuinely compared cells.
 
 ### The replication problem, quantified
 
@@ -125,12 +179,16 @@ planche. The two things most easily misread:
 | file | what it is |
 | --- | --- |
 | `00_SUMMARY.md` | the model equation, glyph key, and per-cell results table |
-| `00_master_summary.csv` | one row per cell — mode, ranges, knots, effect sizes, `sig_frac_x` (the fraction of the range that is significant), joint and shape tests, Wald counts, kurtosis, runtime |
+| `00_master_summary.csv` | one row per cell — mode, ranges, knots, effect sizes, `sig_frac_x` (the fraction of the range that is significant), joint and shape tests, Wald counts, kurtosis, runtime. `x_lo`/`x_hi` are the **overlap** the model is fitted on; `x_ex_lo`/`x_ex_hi` and `x_in_lo`/`x_in_hi` are what each condition covers **on its own**, filled in even for skipped cells so a "not compared" row can still say why |
 | `00_wald_tests.csv` | one row per **coefficient**, every cell |
 | `00_forest.png/.pdf` | all compared cells on one difference axis |
 | `00_significance_map.png/.pdf` | where along elevation each cell differs |
+| `00_sigmap_poc_scapulothoracic_dof2.png/.pdf` | the worked example: one joint × DoF, its three elevation planes |
+| `00_sigmap_elevation.png/.pdf` | all 12 joint × DoF groups × the three elevation planes |
+| `00_sigmap_rotation.png/.pdf` | the same 12 groups at IER 0° and 90° — the 90° rows are empty by construction |
 | `planche_<motion>.png/.pdf` | population curves, 4 joints × 3 DoF, shared abscissa |
 | `planche_diff_<motion>.png/.pdf` | the in-vivo − ex-vivo difference, same layout |
+| `cache/v2_fit.rds` | **untracked.** Everything the figures read: per cell the fitted `curves`, the `dif`erence, `knots`, the thinned `raw` points, plus `bf`/`Vf` (fixed-effect coefficients and their covariance) and the basis recipe `full_rng`/`Kc`. The last three mean a *new* figure needing a different prediction grid or a different contrast can be built from the cache without refitting — rebuild the identical basis with `ns(x, knots = knots, Boundary.knots = full_rng)`. |
 
 Every figure is written as both a high-resolution PNG (2.2× scale) and a vector PDF.
 
