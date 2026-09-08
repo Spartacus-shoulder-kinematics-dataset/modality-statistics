@@ -52,7 +52,10 @@ fig <- function(name, draw, w = 1100, h = 750, res = 130) {
   png(file.path(OUT, paste0(base, ".png")),
       width = round(w*FIG_SCALE), height = round(h*FIG_SCALE), res = round(res*FIG_SCALE))
   op <- par(no.readonly = TRUE); tryCatch(draw(), finally = { par(op); dev.off() })
-  pdf(file.path(OUT, paste0(base, ".pdf")), width = w/res, height = h/res)
+  # cairo_pdf, not pdf(): the legacy device drops non-Latin-1 glyphs silently
+  if (capabilities("cairo")) cairo_pdf(file.path(OUT, paste0(base, ".pdf")),
+                                       width = w/res, height = h/res)
+  else pdf(file.path(OUT, paste0(base, ".pdf")), width = w/res, height = h/res)
   op <- par(no.readonly = TRUE); tryCatch(draw(), finally = { par(op); dev.off() })
   message("  saved ", file.path(S4, base), ".png/.pdf")
 }

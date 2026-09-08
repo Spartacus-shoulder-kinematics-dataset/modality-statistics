@@ -1,0 +1,481 @@
+"joint","motion","dof","curve","term","estimate","se","wald","p_value","passed"
+"sternoclavicular","frontal plane elevation",1,"reference","intercept",-22.60613,1.21258,-18.6430008741691,0,TRUE
+"sternoclavicular","frontal plane elevation",1,"reference","ns1",-11.82146,1.23157,-9.59869110160202,0,TRUE
+"sternoclavicular","frontal plane elevation",1,"reference","ns2",-24.84255,2.14722,-11.5696342247185,0,TRUE
+"sternoclavicular","frontal plane elevation",1,"reference","ns3",-48.64694,2.56972,-18.9308329312143,0,TRUE
+"sternoclavicular","frontal plane elevation",1,"reference","ns4",-54.51243,4.26441,-12.7831118490014,0,TRUE
+"sternoclavicular","frontal plane elevation",1,"difference","condin vivo",-2.61342,2.55853,-1.02145372538137,0.30704,FALSE
+"sternoclavicular","frontal plane elevation",1,"difference","ns1:condin vivo",-2.17957,2.52159,-0.864363358039967,0.38739,FALSE
+"sternoclavicular","frontal plane elevation",1,"difference","ns2:condin vivo",2.34928,4.62112,0.508378921127346,0.61119,FALSE
+"sternoclavicular","frontal plane elevation",1,"difference","ns3:condin vivo",0.85851,5.7495,0.149319071223585,0.8813,FALSE
+"sternoclavicular","frontal plane elevation",1,"difference","ns4:condin vivo",5.41127,9.77261,0.553717993453131,0.57977,FALSE
+"acromioclavicular","frontal plane elevation",1,"reference","intercept",59.11008,1.84102,32.1072448968507,0,TRUE
+"acromioclavicular","frontal plane elevation",1,"reference","ns1",8.34226,0.94027,8.87219628404607,0,TRUE
+"acromioclavicular","frontal plane elevation",1,"reference","ns2",7.84131,1.5101,5.19257665055294,0,TRUE
+"acromioclavicular","frontal plane elevation",1,"reference","ns3",4.34912,3.35332,1.29695943125022,0.19464,FALSE
+"acromioclavicular","frontal plane elevation",1,"reference","ns4",-1.68207,5.84501,-0.28777880619537,0.77352,FALSE
+"acromioclavicular","frontal plane elevation",1,"difference","condin vivo",3.01913,3.46693,0.870836734517282,0.38384,FALSE
+"acromioclavicular","frontal plane elevation",1,"difference","ns1:condin vivo",-1.80245,1.7445,-1.03321868730295,0.3015,FALSE
+"acromioclavicular","frontal plane elevation",1,"difference","ns2:condin vivo",-5.92989,3.0843,-1.92260480498006,0.05453,FALSE
+"acromioclavicular","frontal plane elevation",1,"difference","ns3:condin vivo",11.92732,6.89509,1.72982803705245,0.08366,FALSE
+"acromioclavicular","frontal plane elevation",1,"difference","ns4:condin vivo",20.49157,12.28487,1.66803311715956,0.09531,FALSE
+"scapulothoracic","frontal plane elevation",1,"reference","intercept",34.24537,2.79694,12.2438700865946,0,TRUE
+"scapulothoracic","frontal plane elevation",1,"reference","ns1",-3.46737,2.18925,-1.58381637547105,0.11324,FALSE
+"scapulothoracic","frontal plane elevation",1,"reference","ns2",-11.83892,2.64955,-4.46827574493782,1e-05,TRUE
+"scapulothoracic","frontal plane elevation",1,"reference","ns3",-2.99286,6.1413,-0.487333300766939,0.62602,FALSE
+"scapulothoracic","frontal plane elevation",1,"reference","ns4",9.87163,7.86958,1.25440366576107,0.2097,FALSE
+"scapulothoracic","frontal plane elevation",1,"difference","condin vivo",-8.6678,3.32303,-2.60840257235114,0.0091,TRUE
+"scapulothoracic","frontal plane elevation",1,"difference","ns1:condin vivo",-0.51867,2.59747,-0.199682768232164,0.84173,FALSE
+"scapulothoracic","frontal plane elevation",1,"difference","ns2:condin vivo",9.02506,3.15194,2.86333496195994,0.00419,TRUE
+"scapulothoracic","frontal plane elevation",1,"difference","ns3:condin vivo",-5.11449,7.30174,-0.700448112367737,0.48365,FALSE
+"scapulothoracic","frontal plane elevation",1,"difference","ns4:condin vivo",-14.6582,9.37123,-1.5641703383654,0.11778,FALSE
+"glenohumeral","frontal plane elevation",1,"reference","intercept",-29.0406,15.10575,-1.92248647038379,0.05454,FALSE
+"glenohumeral","frontal plane elevation",1,"reference","ns1",15.92671,12.47471,1.27671985961998,0.2017,FALSE
+"glenohumeral","frontal plane elevation",1,"reference","ns2",33.09338,11.01661,3.00395312169533,0.00266,TRUE
+"glenohumeral","frontal plane elevation",1,"reference","ns3",44.04535,24.43472,1.80257232331699,0.07146,FALSE
+"glenohumeral","frontal plane elevation",1,"reference","ns4",20.79888,10.2506,2.02904025130236,0.04245,TRUE
+"glenohumeral","frontal plane elevation",1,"difference","condin vivo",31.56148,18.08665,1.74501524605165,0.08098,FALSE
+"glenohumeral","frontal plane elevation",1,"difference","ns1:condin vivo",-29.82544,14.93581,-1.99690810207146,0.04584,TRUE
+"glenohumeral","frontal plane elevation",1,"difference","ns2:condin vivo",-45.84396,13.19191,-3.47515712281239,0.00051,TRUE
+"glenohumeral","frontal plane elevation",1,"difference","ns3:condin vivo",-55.32384,29.25212,-1.89127625621664,0.05859,FALSE
+"glenohumeral","frontal plane elevation",1,"difference","ns4:condin vivo",-3.52167,12.31212,-0.286032787204803,0.77485,FALSE
+"sternoclavicular","scapular plane elevation",1,"reference","intercept",5.86,2.1268,2.75531314651119,0.00586,TRUE
+"sternoclavicular","scapular plane elevation",1,"reference","ns1",5.22963,1.23339,4.24004572762873,2e-05,TRUE
+"sternoclavicular","scapular plane elevation",1,"reference","ns2",6.22756,1.17014,5.32206402652674,0,TRUE
+"sternoclavicular","scapular plane elevation",1,"reference","ns3",11.07891,2.80006,3.95666878566888,8e-05,TRUE
+"sternoclavicular","scapular plane elevation",1,"reference","ns4",6.02112,1.96614,3.06240654276908,0.0022,TRUE
+"scapulothoracic","scapular plane elevation",1,"reference","intercept",14.76516,2.42292,6.09395275122579,0,TRUE
+"scapulothoracic","scapular plane elevation",1,"reference","ns1",2.29824,0.93427,2.45993128324788,0.0139,TRUE
+"scapulothoracic","scapular plane elevation",1,"reference","ns2",3.81775,1.42961,2.670483558453,0.00757,TRUE
+"scapulothoracic","scapular plane elevation",1,"reference","ns3",4.45422,2.39981,1.85607193902851,0.06344,FALSE
+"scapulothoracic","scapular plane elevation",1,"reference","ns4",2.77208,2.2132,1.25252123621905,0.21038,FALSE
+"glenohumeral","scapular plane elevation",1,"reference","intercept",51.32239,6.06614,8.46046909566875,0,TRUE
+"glenohumeral","scapular plane elevation",1,"reference","ns1",-45.27621,5.41763,-8.3571986274441,0,TRUE
+"glenohumeral","scapular plane elevation",1,"reference","ns2",-39.08273,5.17027,-7.55912747303332,0,TRUE
+"glenohumeral","scapular plane elevation",1,"reference","ns3",-81.63644,10.99209,-7.42683511506911,0,TRUE
+"glenohumeral","scapular plane elevation",1,"reference","ns4",0.62235,5.49672,0.113222066978125,0.90985,FALSE
+"sternoclavicular","sagittal plane elevation",1,"reference","intercept",-25.91751,1.81808,-14.255428804013,0,TRUE
+"sternoclavicular","sagittal plane elevation",1,"reference","ns1",-3.84747,1.24731,-3.08461408952065,0.00204,TRUE
+"sternoclavicular","sagittal plane elevation",1,"reference","ns2",-13.10543,2.27484,-5.76103374303248,0,TRUE
+"sternoclavicular","sagittal plane elevation",1,"reference","ns3",-31.11426,3.35127,-9.28431907903571,0,TRUE
+"sternoclavicular","sagittal plane elevation",1,"reference","ns4",-38.81179,3.98656,-9.73565931529941,0,TRUE
+"sternoclavicular","sagittal plane elevation",1,"difference","condin vivo",2.96912,4.19661,0.707504390448481,0.47925,FALSE
+"sternoclavicular","sagittal plane elevation",1,"difference","ns1:condin vivo",-1.80139,2.87831,-0.62584989108192,0.53141,FALSE
+"sternoclavicular","sagittal plane elevation",1,"difference","ns2:condin vivo",3.87608,5.25369,0.73778239675352,0.46065,FALSE
+"sternoclavicular","sagittal plane elevation",1,"difference","ns3:condin vivo",8.23685,7.74845,1.06303196123096,0.28777,FALSE
+"sternoclavicular","sagittal plane elevation",1,"difference","ns4:condin vivo",9.63831,9.24799,1.04220592799084,0.29732,FALSE
+"acromioclavicular","sagittal plane elevation",1,"reference","intercept",59.62627,1.68734,35.3374364384179,0,TRUE
+"acromioclavicular","sagittal plane elevation",1,"reference","ns1",2.71325,0.72031,3.76678096930488,0.00017,TRUE
+"acromioclavicular","sagittal plane elevation",1,"reference","ns2",7.92438,1.22942,6.44562476614989,0,TRUE
+"acromioclavicular","sagittal plane elevation",1,"reference","ns3",4.4154,1.79327,2.46220591433526,0.01381,TRUE
+"acromioclavicular","sagittal plane elevation",1,"reference","ns4",-2.14606,2.30211,-0.932214359869858,0.35123,FALSE
+"acromioclavicular","sagittal plane elevation",1,"difference","condin vivo",5.97404,3.51163,1.70121567477211,0.0889,FALSE
+"acromioclavicular","sagittal plane elevation",1,"difference","ns1:condin vivo",2.47004,1.4979,1.64900193604379,0.09915,FALSE
+"acromioclavicular","sagittal plane elevation",1,"difference","ns2:condin vivo",-2.05268,2.55985,-0.801875109869719,0.42262,FALSE
+"acromioclavicular","sagittal plane elevation",1,"difference","ns3:condin vivo",6.49982,3.73369,1.74085690027828,0.08171,FALSE
+"acromioclavicular","sagittal plane elevation",1,"difference","ns4:condin vivo",8.46173,4.80413,1.76134492613647,0.07818,FALSE
+"scapulothoracic","sagittal plane elevation",1,"reference","intercept",32.29358,2.51144,12.858591087185,0,TRUE
+"scapulothoracic","sagittal plane elevation",1,"reference","ns1",0.55501,1.44865,0.383122217236738,0.70163,FALSE
+"scapulothoracic","sagittal plane elevation",1,"reference","ns2",-2.30227,2.0272,-1.13568962115233,0.25609,FALSE
+"scapulothoracic","sagittal plane elevation",1,"reference","ns3",-11.96425,3.0039,-3.98290555611039,7e-05,TRUE
+"scapulothoracic","sagittal plane elevation",1,"reference","ns4",-19.01307,3.26722,-5.81934182577237,0,TRUE
+"scapulothoracic","sagittal plane elevation",1,"difference","condin vivo",2.7188,3.0958,0.878222107371277,0.37982,FALSE
+"scapulothoracic","sagittal plane elevation",1,"difference","ns1:condin vivo",3.13171,1.7873,1.75220164493929,0.07974,FALSE
+"scapulothoracic","sagittal plane elevation",1,"difference","ns2:condin vivo",5.52154,2.49808,2.21031352078396,0.02708,TRUE
+"scapulothoracic","sagittal plane elevation",1,"difference","ns3:condin vivo",11.32717,3.70584,3.05657286876929,0.00224,TRUE
+"scapulothoracic","sagittal plane elevation",1,"difference","ns4:condin vivo",8.08031,4.03057,2.0047561511151,0.04499,TRUE
+"glenohumeral","sagittal plane elevation",1,"reference","intercept",-79.91411,15.57939,-5.12947618616647,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"reference","ns1",116.38565,13.89418,8.37657565973667,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"reference","ns2",83.87582,11.79642,7.11027752487619,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"reference","ns3",195.37515,25.90195,7.54287418514822,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"reference","ns4",-17.98892,7.45769,-2.41213029771954,0.01586,TRUE
+"glenohumeral","sagittal plane elevation",1,"difference","condin vivo",145.09679,18.54036,7.82599636684509,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"difference","ns1:condin vivo",-136.96065,16.53676,-8.28219373081547,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"difference","ns2:condin vivo",-111.71072,14.03955,-7.95685901613656,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"difference","ns3:condin vivo",-250.61333,30.83289,-8.12811676103018,0,TRUE
+"glenohumeral","sagittal plane elevation",1,"difference","ns4:condin vivo",-27.52241,8.93226,-3.08123699937082,0.00206,TRUE
+"sternoclavicular","horizontal flexion",1,"reference","intercept",-32.30372,2.39752,-13.4738062664754,0,TRUE
+"sternoclavicular","horizontal flexion",1,"reference","ns1",-1.80917,1.70998,-1.05800652639212,0.29005,FALSE
+"sternoclavicular","horizontal flexion",1,"reference","ns2",-5.26247,2.14427,-2.45420119667766,0.01412,TRUE
+"sternoclavicular","horizontal flexion",1,"reference","ns3",-25.91205,6.6152,-3.9170471036401,9e-05,TRUE
+"sternoclavicular","horizontal flexion",1,"reference","ns4",-37.89218,10.37011,-3.65398052672537,0.00026,TRUE
+"acromioclavicular","horizontal flexion",1,"reference","intercept",69.33879,1.31859,52.585557299843,0,TRUE
+"acromioclavicular","horizontal flexion",1,"reference","ns1",-5.41665,1.31228,-4.12766330356326,4e-05,TRUE
+"acromioclavicular","horizontal flexion",1,"reference","ns2",-2.83932,1.3716,-2.07007874015748,0.03844,TRUE
+"acromioclavicular","horizontal flexion",1,"reference","ns3",-6.68876,3.33179,-2.00755749912209,0.04469,TRUE
+"acromioclavicular","horizontal flexion",1,"reference","ns4",-0.51415,1.76494,-0.291313019139461,0.77081,FALSE
+"scapulothoracic","horizontal flexion",1,"reference","intercept",43.21429,2.57847,16.7596636765213,0,TRUE
+"scapulothoracic","horizontal flexion",1,"reference","ns1",-11.6021,2.15775,-5.37694357548372,0,TRUE
+"scapulothoracic","horizontal flexion",1,"reference","ns2",-9.08459,2.91555,-3.11590951964466,0.00183,TRUE
+"scapulothoracic","horizontal flexion",1,"reference","ns3",-29.90095,5.81807,-5.13932455264375,0,TRUE
+"scapulothoracic","horizontal flexion",1,"reference","ns4",-22.22955,9.69671,-2.29248373933014,0.02188,TRUE
+"scapulothoracic","horizontal flexion",1,"difference","condin vivo",-1.8039,3.89681,-0.462917103990187,0.64342,FALSE
+"scapulothoracic","horizontal flexion",1,"difference","ns1:condin vivo",-11.85713,3.26065,-3.63643138638002,0.00028,TRUE
+"scapulothoracic","horizontal flexion",1,"difference","ns2:condin vivo",-17.8808,4.40736,-4.05703187395629,5e-05,TRUE
+"scapulothoracic","horizontal flexion",1,"difference","ns3:condin vivo",-21.68049,8.78203,-2.46873331109094,0.01356,TRUE
+"scapulothoracic","horizontal flexion",1,"difference","ns4:condin vivo",-13.3815,14.62959,-0.914687287887084,0.36036,FALSE
+"glenohumeral","horizontal flexion",1,"reference","intercept",70.42315,3.5179,20.0185195713352,0,TRUE
+"glenohumeral","horizontal flexion",1,"reference","ns1",-49.07954,2.38999,-20.5354583073569,0,TRUE
+"glenohumeral","horizontal flexion",1,"reference","ns2",-70.09244,2.67962,-26.1576044364499,0,TRUE
+"glenohumeral","horizontal flexion",1,"reference","ns3",-115.06059,4.97626,-23.1219007849268,0,TRUE
+"glenohumeral","horizontal flexion",1,"reference","ns4",-94.98582,2.95042,-32.1939994983765,0,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",1,"reference","intercept",-38.03383,3.28995,-11.5606103436222,0,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns1",9.50259,2.4192,3.92798859126984,9e-05,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns2",8.32706,1.87011,4.45271133783574,1e-05,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns3",20.64789,5.95017,3.47013446674633,0.00052,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns4",13.12787,4.92315,2.66655901201467,0.00766,TRUE
+"acromioclavicular","internal-external rotation 0 degree-abducted",1,"reference","intercept",63.15156,1.86208,33.9145256916996,0,TRUE
+"acromioclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns1",-2.43175,1.66154,-1.46355188560011,0.14332,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns2",-0.55715,1.87329,-0.29741791180223,0.76615,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns3",-12.11292,5.42871,-2.2312704123079,0.02566,TRUE
+"acromioclavicular","internal-external rotation 0 degree-abducted",1,"reference","ns4",-7.49969,7.65484,-0.979731777542052,0.32722,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"reference","intercept",16.32641,4.16496,3.91994400906611,9e-05,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"reference","ns1",16.03137,3.48257,4.6033159419624,0,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"reference","ns2",13.23962,3.99562,3.31353331898429,0.00092,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"reference","ns3",32.86542,12.96682,2.53457825434455,0.01126,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"reference","ns4",19.81742,15.5516,1.27430103654929,0.20256,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"difference","condin vivo",16.05605,4.8385,3.31839413041232,0.00091,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"difference","ns1:condin vivo",-19.75853,3.93501,-5.02121468560436,0,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"difference","ns2:condin vivo",-23.23005,4.86246,-4.7774274749818,0,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"difference","ns3:condin vivo",-61.84541,15.65736,-3.94992578570078,8e-05,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",1,"difference","ns4:condin vivo",-62.97527,19.63575,-3.20717415937767,0.00134,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"reference","intercept",1.96924,28.60485,0.0688428710515874,0.94511,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"reference","ns1",-23.16534,29.49229,-0.785471050230416,0.43218,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"reference","ns2",-17.18155,40.93156,-0.419762892008025,0.67466,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"reference","ns3",19.9865,65.76217,0.303920932049535,0.76119,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"reference","ns4",76.00242,76.77058,0.989994083671115,0.32218,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"difference","condin vivo",22.96406,32.87529,0.69852037807119,0.48485,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"difference","ns1:condin vivo",33.11897,34.16289,0.969442866221213,0.33232,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"difference","ns2:condin vivo",40.6898,50.13041,0.811678978887266,0.41698,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"difference","ns3:condin vivo",-3.4426,78.38406,-0.0439196438663677,0.96497,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",1,"difference","ns4:condin vivo",-98.84083,96.01597,-1.02942073073886,0.30328,FALSE
+"scapulothoracic","internal-external rotation 90 degree-abducted",1,"reference","intercept",29.27991,1.82073,16.0814124005207,0,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",1,"reference","ns1",0.58317,0.58858,0.990808386285637,0.32178,FALSE
+"scapulothoracic","internal-external rotation 90 degree-abducted",1,"reference","ns2",2.36162,0.6633,3.56041007085783,0.00037,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",1,"reference","ns3",-4.43853,1.52719,-2.90633778377281,0.00366,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",1,"reference","ns4",-10.47983,2.00677,-5.22223772529986,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",1,"reference","intercept",-27.03701,2.62958,-10.2818739114231,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",1,"reference","ns1",4.63852,1.86192,2.49125633754404,0.01273,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",1,"reference","ns2",3.38003,2.39199,1.41306192751642,0.15764,FALSE
+"glenohumeral","internal-external rotation 90 degree-abducted",1,"reference","ns3",0.08471,4.53704,0.0186707633170525,0.9851,FALSE
+"glenohumeral","internal-external rotation 90 degree-abducted",1,"reference","ns4",-7.14095,3.57593,-1.99694904542315,0.04583,TRUE
+"sternoclavicular","frontal plane elevation",2,"reference","intercept",-8.41127,2.0636,-4.07601763907734,5e-05,TRUE
+"sternoclavicular","frontal plane elevation",2,"reference","ns1",-4.62394,0.8528,-5.42206848030019,0,TRUE
+"sternoclavicular","frontal plane elevation",2,"reference","ns2",-14.39966,1.64994,-8.7273840260858,0,TRUE
+"sternoclavicular","frontal plane elevation",2,"reference","ns3",-31.43002,3.07308,-10.2275306858266,0,TRUE
+"sternoclavicular","frontal plane elevation",2,"reference","ns4",-37.47155,4.88521,-7.67040720869727,0,TRUE
+"sternoclavicular","frontal plane elevation",2,"difference","condin vivo",-1.56979,4.28926,-0.365981544602099,0.71438,FALSE
+"sternoclavicular","frontal plane elevation",2,"difference","ns1:condin vivo",-6.69672,1.72748,-3.8765832310649,0.00011,TRUE
+"sternoclavicular","frontal plane elevation",2,"difference","ns2:condin vivo",0.27559,3.61066,0.0763267657436591,0.93916,FALSE
+"sternoclavicular","frontal plane elevation",2,"difference","ns3:condin vivo",2.27027,6.84933,0.33145869742004,0.7403,FALSE
+"sternoclavicular","frontal plane elevation",2,"difference","ns4:condin vivo",17.05215,11.20455,1.52189512296344,0.12804,FALSE
+"acromioclavicular","frontal plane elevation",2,"reference","intercept",3.52443,2.85182,1.23585289394141,0.21651,FALSE
+"acromioclavicular","frontal plane elevation",2,"reference","ns1",1.38549,2.0553,0.674105969931397,0.50025,FALSE
+"acromioclavicular","frontal plane elevation",2,"reference","ns2",12.58298,2.23596,5.6275514767706,0,TRUE
+"acromioclavicular","frontal plane elevation",2,"reference","ns3",22.24196,6.6858,3.32674623829609,0.00088,TRUE
+"acromioclavicular","frontal plane elevation",2,"reference","ns4",32.04627,10.51494,3.04768928781334,0.00231,TRUE
+"acromioclavicular","frontal plane elevation",2,"difference","condin vivo",-6.56839,5.35606,-1.22634735234482,0.22007,FALSE
+"acromioclavicular","frontal plane elevation",2,"difference","ns1:condin vivo",-8.34984,3.80919,-2.1920250761973,0.02838,TRUE
+"acromioclavicular","frontal plane elevation",2,"difference","ns2:condin vivo",-27.48705,4.56786,-6.01748959031144,0,TRUE
+"acromioclavicular","frontal plane elevation",2,"difference","ns3:condin vivo",-50.75189,13.34844,-3.80208398884064,0.00014,TRUE
+"acromioclavicular","frontal plane elevation",2,"difference","ns4:condin vivo",-53.55152,21.52411,-2.48797836472681,0.01285,TRUE
+"scapulothoracic","frontal plane elevation",2,"reference","intercept",0.98619,2.25684,0.436978252778221,0.66213,FALSE
+"scapulothoracic","frontal plane elevation",2,"reference","ns1",-10.27882,1.8849,-5.45324420393655,0,TRUE
+"scapulothoracic","frontal plane elevation",2,"reference","ns2",-35.99727,2.44508,-14.7223281037839,0,TRUE
+"scapulothoracic","frontal plane elevation",2,"reference","ns3",-77.24318,4.45573,-17.3356958343526,0,TRUE
+"scapulothoracic","frontal plane elevation",2,"reference","ns4",-91.43972,6.58718,-13.8814667277955,0,TRUE
+"scapulothoracic","frontal plane elevation",2,"difference","condin vivo",-1.13104,2.67591,-0.42267490311707,0.67253,FALSE
+"scapulothoracic","frontal plane elevation",2,"difference","ns1:condin vivo",-18.39985,2.23239,-8.24222022137709,0,TRUE
+"scapulothoracic","frontal plane elevation",2,"difference","ns2:condin vivo",-1.37459,2.90697,-0.472860057035332,0.63631,FALSE
+"scapulothoracic","frontal plane elevation",2,"difference","ns3:condin vivo",8.11683,5.28721,1.53518207145167,0.12474,FALSE
+"scapulothoracic","frontal plane elevation",2,"difference","ns4:condin vivo",36.50933,7.83499,4.65978003800898,0,TRUE
+"glenohumeral","frontal plane elevation",2,"reference","intercept",-4.66965,2.88358,-1.61939325421871,0.10536,FALSE
+"glenohumeral","frontal plane elevation",2,"reference","ns1",-65.86101,2.40628,-27.3704681084496,0,TRUE
+"glenohumeral","frontal plane elevation",2,"reference","ns2",-70.71159,2.57182,-27.494766352233,0,TRUE
+"glenohumeral","frontal plane elevation",2,"reference","ns3",-113.23149,4.51344,-25.0876249601191,0,TRUE
+"glenohumeral","frontal plane elevation",2,"reference","ns4",-64.39432,3.89478,-16.5334935477742,0,TRUE
+"glenohumeral","frontal plane elevation",2,"difference","condin vivo",-2.70219,3.44809,-0.783677340208637,0.43323,FALSE
+"glenohumeral","frontal plane elevation",2,"difference","ns1:condin vivo",20.71776,2.87611,7.20339625396803,0,TRUE
+"glenohumeral","frontal plane elevation",2,"difference","ns2:condin vivo",8.41194,3.07818,2.73276416583825,0.00628,TRUE
+"glenohumeral","frontal plane elevation",2,"difference","ns3:condin vivo",7.80924,5.39458,1.44760852559421,0.14773,FALSE
+"glenohumeral","frontal plane elevation",2,"difference","ns4:condin vivo",-18.81983,4.67218,-4.02806184693227,6e-05,TRUE
+"sternoclavicular","scapular plane elevation",2,"reference","intercept",-44.1587,2.83897,-15.5544792653674,0,TRUE
+"sternoclavicular","scapular plane elevation",2,"reference","ns1",-10.69122,0.7086,-15.0878069432684,0,TRUE
+"sternoclavicular","scapular plane elevation",2,"reference","ns2",-13.24558,0.85662,-15.4626088580701,0,TRUE
+"sternoclavicular","scapular plane elevation",2,"reference","ns3",-24.55379,1.23255,-19.9211309886009,0,TRUE
+"sternoclavicular","scapular plane elevation",2,"reference","ns4",-19.155,1.07639,-17.7955945335798,0,TRUE
+"scapulothoracic","scapular plane elevation",2,"reference","intercept",-5.06637,1.50345,-3.36982939239749,0.00075,TRUE
+"scapulothoracic","scapular plane elevation",2,"reference","ns1",-22.34632,0.87347,-25.583385806038,0,TRUE
+"scapulothoracic","scapular plane elevation",2,"reference","ns2",-31.62733,1.01834,-31.0577312096156,0,TRUE
+"scapulothoracic","scapular plane elevation",2,"reference","ns3",-53.82601,1.22041,-44.1048582033907,0,TRUE
+"scapulothoracic","scapular plane elevation",2,"reference","ns4",-42.32817,1.22393,-34.5838160679124,0,TRUE
+"glenohumeral","scapular plane elevation",2,"reference","intercept",-12.53891,1.89932,-6.60178906134827,0,TRUE
+"glenohumeral","scapular plane elevation",2,"reference","ns1",-48.72123,1.53795,-31.679332878182,0,TRUE
+"glenohumeral","scapular plane elevation",2,"reference","ns2",-69.66149,1.35433,-51.4361270886711,0,TRUE
+"glenohumeral","scapular plane elevation",2,"reference","ns3",-106.33305,2.50217,-42.4963331827973,0,TRUE
+"glenohumeral","scapular plane elevation",2,"reference","ns4",-83.77874,1.57758,-53.1058583399891,0,TRUE
+"sternoclavicular","sagittal plane elevation",2,"reference","intercept",-10.25821,2.06391,-4.97027971180914,0,TRUE
+"sternoclavicular","sagittal plane elevation",2,"reference","ns1",-1.18747,0.27022,-4.39445636888461,1e-05,TRUE
+"sternoclavicular","sagittal plane elevation",2,"reference","ns2",-8.88845,1.12981,-7.86720776059691,0,TRUE
+"sternoclavicular","sagittal plane elevation",2,"reference","ns3",-20.39852,1.4964,-13.6317294840952,0,TRUE
+"sternoclavicular","sagittal plane elevation",2,"reference","ns4",-25.433,2.76675,-9.19237372368302,0,TRUE
+"sternoclavicular","sagittal plane elevation",2,"difference","condin vivo",-6.10115,4.76549,-1.28027757901076,0.20045,FALSE
+"sternoclavicular","sagittal plane elevation",2,"difference","ns1:condin vivo",-3.25135,0.6172,-5.26790343486714,0,TRUE
+"sternoclavicular","sagittal plane elevation",2,"difference","ns2:condin vivo",1.19191,2.61109,0.456479860901003,0.64805,FALSE
+"sternoclavicular","sagittal plane elevation",2,"difference","ns3:condin vivo",12.71271,3.47256,3.6609043472251,0.00025,TRUE
+"sternoclavicular","sagittal plane elevation",2,"difference","ns4:condin vivo",22.51337,6.4366,3.49771152471802,0.00047,TRUE
+"acromioclavicular","sagittal plane elevation",2,"reference","intercept",2.91236,2.79945,1.04033292253836,0.29819,FALSE
+"acromioclavicular","sagittal plane elevation",2,"reference","ns1",1.24625,0.62602,1.99075109421424,0.04651,TRUE
+"acromioclavicular","sagittal plane elevation",2,"reference","ns2",7.22263,0.90126,8.01392494951512,0,TRUE
+"acromioclavicular","sagittal plane elevation",2,"reference","ns3",13.24,1.91927,6.89845618386157,0,TRUE
+"acromioclavicular","sagittal plane elevation",2,"reference","ns4",13.90731,2.00171,6.94771470392814,0,TRUE
+"acromioclavicular","sagittal plane elevation",2,"difference","condin vivo",-11.18709,5.82802,-1.91953527956321,0.05492,FALSE
+"acromioclavicular","sagittal plane elevation",2,"difference","ns1:condin vivo",-7.51662,1.29983,-5.78277159320834,0,TRUE
+"acromioclavicular","sagittal plane elevation",2,"difference","ns2:condin vivo",-14.57898,1.87778,-7.76394465805366,0,TRUE
+"acromioclavicular","sagittal plane elevation",2,"difference","ns3:condin vivo",-26.98498,3.99595,-6.75308249602723,0,TRUE
+"acromioclavicular","sagittal plane elevation",2,"difference","ns4:condin vivo",-21.62434,4.19325,-5.15694032075359,0,TRUE
+"scapulothoracic","sagittal plane elevation",2,"reference","intercept",-4.73966,2.66668,-1.77736361318193,0.07551,FALSE
+"scapulothoracic","sagittal plane elevation",2,"reference","ns1",-5.80387,1.38689,-4.18480917736807,3e-05,TRUE
+"scapulothoracic","sagittal plane elevation",2,"reference","ns2",-30.93181,2.86242,-10.8061744957064,0,TRUE
+"scapulothoracic","sagittal plane elevation",2,"reference","ns3",-42.44078,2.79805,-15.1679848465896,0,TRUE
+"scapulothoracic","sagittal plane elevation",2,"reference","ns4",-45.57369,2.79971,-16.27800379325,0,TRUE
+"scapulothoracic","sagittal plane elevation",2,"difference","condin vivo",-0.59681,3.34976,-0.178165002865877,0.85859,FALSE
+"scapulothoracic","sagittal plane elevation",2,"difference","ns1:condin vivo",-16.92959,1.70958,-9.90277729032862,0,TRUE
+"scapulothoracic","sagittal plane elevation",2,"difference","ns2:condin vivo",-0.0529,4.05425,-0.0130480360115928,0.98959,FALSE
+"scapulothoracic","sagittal plane elevation",2,"difference","ns3:condin vivo",-10.24267,3.45272,-2.96655100905952,0.00301,TRUE
+"scapulothoracic","sagittal plane elevation",2,"difference","ns4:condin vivo",1.09131,3.4774,0.313829297751193,0.75365,FALSE
+"glenohumeral","sagittal plane elevation",2,"reference","intercept",4.85884,2.50016,1.94341162165621,0.05197,FALSE
+"glenohumeral","sagittal plane elevation",2,"reference","ns1",-75.98241,2.55027,-29.7938688844711,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"reference","ns2",-82.54323,2.48434,-33.2254160058607,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"reference","ns3",-145.13739,5.29964,-27.3862734072503,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"reference","ns4",-87.7354,4.22007,-20.7900342885308,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"difference","condin vivo",-20.87556,2.97535,-7.01616952627422,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"difference","ns1:condin vivo",32.40379,3.03539,10.6753300234896,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"difference","ns2:condin vivo",21.37434,2.95698,7.2284357689264,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"difference","ns3:condin vivo",41.50525,6.31065,6.5770166306165,0,TRUE
+"glenohumeral","sagittal plane elevation",2,"difference","ns4:condin vivo",7.72047,5.03464,1.53347011901546,0.12516,FALSE
+"sternoclavicular","horizontal flexion",2,"reference","intercept",-20.79718,2.0747,-10.0241866293922,0,TRUE
+"sternoclavicular","horizontal flexion",2,"reference","ns1",5.63738,1.33306,4.2289019248946,2e-05,TRUE
+"sternoclavicular","horizontal flexion",2,"reference","ns2",3.10033,1.24918,2.48189212123153,0.01307,TRUE
+"sternoclavicular","horizontal flexion",2,"reference","ns3",-4.31743,6.43771,-0.670646860451931,0.50245,FALSE
+"sternoclavicular","horizontal flexion",2,"reference","ns4",-24.09953,10.23694,-2.35417321973168,0.01856,TRUE
+"acromioclavicular","horizontal flexion",2,"reference","intercept",10.28323,3.3591,3.0613051114882,0.0022,TRUE
+"acromioclavicular","horizontal flexion",2,"reference","ns1",-5.14586,2.01279,-2.55658066663686,0.01057,TRUE
+"acromioclavicular","horizontal flexion",2,"reference","ns2",-3.66484,1.37838,-2.6588023621933,0.00784,TRUE
+"acromioclavicular","horizontal flexion",2,"reference","ns3",-5.79452,4.58633,-1.26343285371964,0.20643,FALSE
+"acromioclavicular","horizontal flexion",2,"reference","ns4",1.35208,1.8631,0.725715205839729,0.46801,FALSE
+"scapulothoracic","horizontal flexion",2,"reference","intercept",25.03271,2.34808,10.6609272256482,0,TRUE
+"scapulothoracic","horizontal flexion",2,"reference","ns1",-14.25118,1.40177,-10.1665608480707,0,TRUE
+"scapulothoracic","horizontal flexion",2,"reference","ns2",-7.57369,2.14946,-3.52353149163046,0.00043,TRUE
+"scapulothoracic","horizontal flexion",2,"reference","ns3",-6.49783,4.83855,-1.34292918332972,0.1793,FALSE
+"scapulothoracic","horizontal flexion",2,"reference","ns4",24.92124,8.50417,2.93047293269067,0.00338,TRUE
+"scapulothoracic","horizontal flexion",2,"difference","condin vivo",11.62197,3.54867,3.27502134602541,0.00106,TRUE
+"scapulothoracic","horizontal flexion",2,"difference","ns1:condin vivo",11.39892,2.11744,5.38334970530452,0,TRUE
+"scapulothoracic","horizontal flexion",2,"difference","ns2:condin vivo",4.86249,3.24907,1.49657902107372,0.1345,FALSE
+"scapulothoracic","horizontal flexion",2,"difference","ns3:condin vivo",-0.00017,0.15861,-0.00107181136120043,0.99914,FALSE
+"scapulothoracic","horizontal flexion",2,"difference","ns4:condin vivo",-31.1856,12.82939,-2.43079366984712,0.01507,TRUE
+"glenohumeral","horizontal flexion",2,"reference","intercept",-69.45003,2.16192,-32.1242367895204,0,TRUE
+"glenohumeral","horizontal flexion",2,"reference","ns1",0.78911,2.85342,0.276548843142615,0.78213,FALSE
+"glenohumeral","horizontal flexion",2,"reference","ns2",7.98193,1.88041,4.24478172313485,2e-05,TRUE
+"glenohumeral","horizontal flexion",2,"reference","ns3",4.603,3.85942,1.19266625555135,0.233,FALSE
+"glenohumeral","horizontal flexion",2,"reference","ns4",12.29395,4.92259,2.4974556077187,0.01251,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",2,"reference","intercept",-13.87288,1.41236,-9.82248152029228,0,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns1",0.24861,1.11049,0.223874145647417,0.82285,FALSE
+"sternoclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns2",1.25438,1.19936,1.04587446638207,0.29562,FALSE
+"sternoclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns3",0.63156,2.71944,0.232238990380372,0.81635,FALSE
+"sternoclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns4",3.53104,2.61072,1.35251578108721,0.17621,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",2,"reference","intercept",-2.24684,2.91254,-0.771436615462792,0.44045,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns1",3.96873,1.8022,2.20215847297747,0.02765,TRUE
+"acromioclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns2",4.36594,1.79276,2.43531761083469,0.01488,TRUE
+"acromioclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns3",-0.73479,4.19944,-0.174973329777304,0.8611,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",2,"reference","ns4",-7.71023,5.50163,-1.40144466276358,0.16108,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"reference","intercept",0.40488,3.39559,0.119237010357552,0.90509,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"reference","ns1",5.43799,1.69745,3.20362308168135,0.00136,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"reference","ns2",4.60887,1.76445,2.61207175040381,0.009,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"reference","ns3",5.56953,7.80095,0.713955351591793,0.47525,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"reference","ns4",-3.86906,9.59773,-0.403122404985346,0.68686,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"difference","condin vivo",-9.96276,4.01596,-2.48079164135101,0.01311,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"difference","ns1:condin vivo",-0.03258,1.41105,-0.0230891889018816,0.98158,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"difference","ns2:condin vivo",1.01703,2.105,0.483149643705463,0.62899,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"difference","ns3:condin vivo",-4.96553,9.42491,-0.526851715294894,0.5983,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",2,"difference","ns4:condin vivo",-10.91844,12.05619,-0.905629390379548,0.36513,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"reference","intercept",-46.37632,6.75601,-6.86445401945823,0,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"reference","ns1",11.69818,6.60746,1.7704503697336,0.07665,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"reference","ns2",10.46165,5.32888,1.9631986458693,0.04962,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"reference","ns3",25.76691,12.53442,2.05569224583188,0.03981,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"reference","ns4",11.65497,8.51208,1.36922702794147,0.17093,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"difference","condin vivo",27.2968,7.91987,3.44662222991034,0.00057,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"difference","ns1:condin vivo",-5.19656,7.72593,-0.672612876378637,0.50119,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"difference","ns2:condin vivo",-11.06062,6.43101,-1.71988847785962,0.08545,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"difference","ns3:condin vivo",-20.57755,14.65473,-1.40415756550957,0.16027,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",2,"difference","ns4:condin vivo",-13.76854,10.56542,-1.30317015319789,0.19252,FALSE
+"scapulothoracic","internal-external rotation 90 degree-abducted",2,"reference","intercept",-23.36369,2.03387,-11.487307448362,0,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",2,"reference","ns1",-2.38806,1.09756,-2.1757899340355,0.02957,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",2,"reference","ns2",-7.01922,1.19334,-5.88199507265322,0,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",2,"reference","ns3",-18.62587,2.60914,-7.13870087461769,0,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",2,"reference","ns4",-23.57222,2.04348,-11.5353318848239,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",2,"reference","intercept",-56.27261,2.12684,-26.4583184442647,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",2,"reference","ns1",0.72708,1.57342,0.462101663891396,0.64401,FALSE
+"glenohumeral","internal-external rotation 90 degree-abducted",2,"reference","ns2",-0.8531,0.9171,-0.930214807545524,0.35226,FALSE
+"glenohumeral","internal-external rotation 90 degree-abducted",2,"reference","ns3",7.38474,3.61444,2.0431214793993,0.04104,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",2,"reference","ns4",12.69359,2.26324,5.60859210689101,0,TRUE
+"sternoclavicular","frontal plane elevation",3,"reference","intercept",-5.313,2.94284,-1.80539886640116,0.07101,FALSE
+"sternoclavicular","frontal plane elevation",3,"reference","ns1",4.30012,0.95431,4.50599909882533,1e-05,TRUE
+"sternoclavicular","frontal plane elevation",3,"reference","ns2",12.16186,1.59923,7.60482232074186,0,TRUE
+"sternoclavicular","frontal plane elevation",3,"reference","ns3",41.05813,3.78744,10.8406020953467,0,TRUE
+"sternoclavicular","frontal plane elevation",3,"reference","ns4",57.87808,6.78457,8.53083983214854,0,TRUE
+"sternoclavicular","frontal plane elevation",3,"difference","condin vivo",1.35458,6.0954,0.222229878268858,0.82413,FALSE
+"sternoclavicular","frontal plane elevation",3,"difference","ns1:condin vivo",11.47618,1.93569,5.92872825710728,0,TRUE
+"sternoclavicular","frontal plane elevation",3,"difference","ns2:condin vivo",16.03957,3.58669,4.47196997789048,1e-05,TRUE
+"sternoclavicular","frontal plane elevation",3,"difference","ns3:condin vivo",17.72405,8.4604,2.09494231951208,0.03618,TRUE
+"sternoclavicular","frontal plane elevation",3,"difference","ns4:condin vivo",2.08561,15.37822,0.135621027661199,0.89212,FALSE
+"acromioclavicular","frontal plane elevation",3,"reference","intercept",5.30969,2.60496,2.03830001228426,0.04152,TRUE
+"acromioclavicular","frontal plane elevation",3,"reference","ns1",5.57907,1.2027,4.63878772761287,0,TRUE
+"acromioclavicular","frontal plane elevation",3,"reference","ns2",14.34317,2.3569,6.08560821417964,0,TRUE
+"acromioclavicular","frontal plane elevation",3,"reference","ns3",41.11565,4.81478,8.53946597767707,0,TRUE
+"acromioclavicular","frontal plane elevation",3,"reference","ns4",55.13611,9.68324,5.69397329819358,0,TRUE
+"acromioclavicular","frontal plane elevation",3,"difference","condin vivo",-9.50879,4.93346,-1.92740794493114,0.05393,FALSE
+"acromioclavicular","frontal plane elevation",3,"difference","ns1:condin vivo",3.48323,2.23174,1.56076872753995,0.11858,FALSE
+"acromioclavicular","frontal plane elevation",3,"difference","ns2:condin vivo",-3.80642,4.87815,-0.780299908776893,0.43522,FALSE
+"acromioclavicular","frontal plane elevation",3,"difference","ns3:condin vivo",1.08886,9.78441,0.111285197574509,0.91139,FALSE
+"acromioclavicular","frontal plane elevation",3,"difference","ns4:condin vivo",-1.38206,19.66956,-0.0702639001584174,0.94398,FALSE
+"scapulothoracic","frontal plane elevation",3,"reference","intercept",-8.29628,2.7978,-2.9652870112231,0.00302,TRUE
+"scapulothoracic","frontal plane elevation",3,"reference","ns1",5.4016,1.78584,3.02468306231241,0.00249,TRUE
+"scapulothoracic","frontal plane elevation",3,"reference","ns2",5.91893,2.10694,2.80925417904639,0.00497,TRUE
+"scapulothoracic","frontal plane elevation",3,"reference","ns3",19.86013,4.41679,4.49650764469219,1e-05,TRUE
+"scapulothoracic","frontal plane elevation",3,"reference","ns4",22.2201,5.18563,4.28493741358331,2e-05,TRUE
+"scapulothoracic","frontal plane elevation",3,"difference","condin vivo",-1.19162,3.32034,-0.358884933470669,0.71968,FALSE
+"scapulothoracic","frontal plane elevation",3,"difference","ns1:condin vivo",7.38462,2.11685,3.48849469730968,0.00049,TRUE
+"scapulothoracic","frontal plane elevation",3,"difference","ns2:condin vivo",9.4353,2.5051,3.76643646960201,0.00017,TRUE
+"scapulothoracic","frontal plane elevation",3,"difference","ns3:condin vivo",16.05659,5.24594,3.0607650869053,0.00221,TRUE
+"scapulothoracic","frontal plane elevation",3,"difference","ns4:condin vivo",7.96999,6.16766,1.29222265818803,0.19628,FALSE
+"glenohumeral","frontal plane elevation",3,"reference","intercept",38.29873,15.58783,2.45696354142944,0.01401,TRUE
+"glenohumeral","frontal plane elevation",3,"reference","ns1",-23.89494,11.66171,-2.04900825007653,0.04046,TRUE
+"glenohumeral","frontal plane elevation",3,"reference","ns2",-23.43213,10.40973,-2.25098345490229,0.02439,TRUE
+"glenohumeral","frontal plane elevation",3,"reference","ns3",-47.36558,23.79667,-1.99042891295295,0.04654,TRUE
+"glenohumeral","frontal plane elevation",3,"reference","ns4",-9.61728,12.21015,-0.787646343411014,0.4309,FALSE
+"glenohumeral","frontal plane elevation",3,"difference","condin vivo",-86.57476,18.6626,-4.63894419855754,0,TRUE
+"glenohumeral","frontal plane elevation",3,"difference","ns1:condin vivo",25.12639,13.95726,1.80023801233193,0.07182,FALSE
+"glenohumeral","frontal plane elevation",3,"difference","ns2:condin vivo",28.77762,12.46389,2.30887949107381,0.02095,TRUE
+"glenohumeral","frontal plane elevation",3,"difference","ns3:condin vivo",51.18109,28.48567,1.7967311283182,0.07238,FALSE
+"glenohumeral","frontal plane elevation",3,"difference","ns4:condin vivo",8.17088,14.64462,0.557944146041345,0.57688,FALSE
+"sternoclavicular","scapular plane elevation",3,"reference","intercept",2.49045,2.24202,1.11080632643777,0.26665,FALSE
+"sternoclavicular","scapular plane elevation",3,"reference","ns1",10.47454,0.96491,10.8554580219917,0,TRUE
+"sternoclavicular","scapular plane elevation",3,"reference","ns2",14.54757,1.02801,14.1511950272857,0,TRUE
+"sternoclavicular","scapular plane elevation",3,"reference","ns3",26.37131,1.41794,18.5983257401583,0,TRUE
+"sternoclavicular","scapular plane elevation",3,"reference","ns4",23.18241,0.96586,24.0018325637256,0,TRUE
+"scapulothoracic","scapular plane elevation",3,"reference","intercept",-4.32713,1.05244,-4.11152179696705,4e-05,TRUE
+"scapulothoracic","scapular plane elevation",3,"reference","ns1",9.45375,0.68301,13.841305398164,0,TRUE
+"scapulothoracic","scapular plane elevation",3,"reference","ns2",12.99214,1.01219,12.8356731443701,0,TRUE
+"scapulothoracic","scapular plane elevation",3,"reference","ns3",22.83832,1.77955,12.83376134416,0,TRUE
+"scapulothoracic","scapular plane elevation",3,"reference","ns4",16.57521,2.02396,8.18949485167691,0,TRUE
+"glenohumeral","scapular plane elevation",3,"reference","intercept",-84.93248,7.24983,-11.7150995264717,0,TRUE
+"glenohumeral","scapular plane elevation",3,"reference","ns1",33.32384,5.39116,6.18120033536382,0,TRUE
+"glenohumeral","scapular plane elevation",3,"reference","ns2",31.02542,5.64518,5.49591332783011,0,TRUE
+"glenohumeral","scapular plane elevation",3,"reference","ns3",65.62384,12.48936,5.2543797280245,0,TRUE
+"glenohumeral","scapular plane elevation",3,"reference","ns4",7.82014,5.33185,1.46668417153521,0.14246,FALSE
+"sternoclavicular","sagittal plane elevation",3,"reference","intercept",-4.27219,3.01086,-1.41892681825126,0.15592,FALSE
+"sternoclavicular","sagittal plane elevation",3,"reference","ns1",2.32753,1.00987,2.30478180359848,0.02118,TRUE
+"sternoclavicular","sagittal plane elevation",3,"reference","ns2",9.53986,1.94343,4.90877469216797,0,TRUE
+"sternoclavicular","sagittal plane elevation",3,"reference","ns3",27.58463,3.4462,8.00436132551796,0,TRUE
+"sternoclavicular","sagittal plane elevation",3,"reference","ns4",35.21667,4.25438,8.27774434817764,0,TRUE
+"sternoclavicular","sagittal plane elevation",3,"difference","condin vivo",4.90576,6.95211,0.705650514735814,0.48041,FALSE
+"sternoclavicular","sagittal plane elevation",3,"difference","ns1:condin vivo",10.24689,2.32927,4.39918515242973,1e-05,TRUE
+"sternoclavicular","sagittal plane elevation",3,"difference","ns2:condin vivo",10.55813,4.48916,2.3519166169172,0.01868,TRUE
+"sternoclavicular","sagittal plane elevation",3,"difference","ns3:condin vivo",8.60935,7.96827,1.0804541010784,0.27994,FALSE
+"sternoclavicular","sagittal plane elevation",3,"difference","ns4:condin vivo",4.9615,9.86381,0.503000361929113,0.61496,FALSE
+"acromioclavicular","sagittal plane elevation",3,"reference","intercept",7.10378,1.89879,3.74121414163757,0.00018,TRUE
+"acromioclavicular","sagittal plane elevation",3,"reference","ns1",2.32243,0.57862,4.01373958729391,6e-05,TRUE
+"acromioclavicular","sagittal plane elevation",3,"reference","ns2",10.00405,1.45326,6.88386799333911,0,TRUE
+"acromioclavicular","sagittal plane elevation",3,"reference","ns3",17.47753,1.72169,10.1513803297922,0,TRUE
+"acromioclavicular","sagittal plane elevation",3,"reference","ns4",17.74171,2.04164,8.68993064399208,0,TRUE
+"acromioclavicular","sagittal plane elevation",3,"difference","condin vivo",-5.15744,3.9509,-1.30538358348731,0.19176,FALSE
+"acromioclavicular","sagittal plane elevation",3,"difference","ns1:condin vivo",3.63991,1.20082,3.0311870222015,0.00244,TRUE
+"acromioclavicular","sagittal plane elevation",3,"difference","ns2:condin vivo",1.62066,3.02642,0.535503994818961,0.5923,FALSE
+"acromioclavicular","sagittal plane elevation",3,"difference","ns3:condin vivo",-1.07671,3.58422,-0.300402877055538,0.76387,FALSE
+"acromioclavicular","sagittal plane elevation",3,"difference","ns4:condin vivo",-5.8641,4.27424,-1.371963202815,0.17008,FALSE
+"scapulothoracic","sagittal plane elevation",3,"reference","intercept",-5.52757,1.70166,-3.24833985637554,0.00116,TRUE
+"scapulothoracic","sagittal plane elevation",3,"reference","ns1",3.91629,1.21519,3.22277997679375,0.00127,TRUE
+"scapulothoracic","sagittal plane elevation",3,"reference","ns2",8.51392,1.77006,4.80996124425161,0,TRUE
+"scapulothoracic","sagittal plane elevation",3,"reference","ns3",9.72055,3.47463,2.79757844720157,0.00515,TRUE
+"scapulothoracic","sagittal plane elevation",3,"reference","ns4",7.92388,3.37441,2.34822680112968,0.01886,TRUE
+"scapulothoracic","sagittal plane elevation",3,"difference","condin vivo",-6.4203,2.09753,-3.06088589912898,0.00221,TRUE
+"scapulothoracic","sagittal plane elevation",3,"difference","ns1:condin vivo",7.33691,1.49798,4.89786913042898,0,TRUE
+"scapulothoracic","sagittal plane elevation",3,"difference","ns2:condin vivo",6.40422,2.18161,2.93554760016685,0.00333,TRUE
+"scapulothoracic","sagittal plane elevation",3,"difference","ns3:condin vivo",19.14482,4.28695,4.46583701699343,1e-05,TRUE
+"scapulothoracic","sagittal plane elevation",3,"difference","ns4:condin vivo",16.03613,4.16709,3.84828021473018,0.00012,TRUE
+"glenohumeral","sagittal plane elevation",3,"reference","intercept",101.91669,16.85782,6.04566248779498,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"reference","ns1",-103.15645,14.60499,-7.06309624313334,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"reference","ns2",-88.84915,11.98623,-7.41260179389182,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"reference","ns3",-226.55589,27.13692,-8.3486220986022,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"reference","ns4",-54.18226,8.59708,-6.30240267625752,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"difference","condin vivo",-169.47724,20.0622,-8.44758999511519,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"difference","ns1:condin vivo",113.34026,17.38275,6.52027210884354,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"difference","ns2:condin vivo",101.41996,14.26563,7.10939229462702,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"difference","ns3:condin vivo",251.55477,32.30391,7.78713072194666,0,TRUE
+"glenohumeral","sagittal plane elevation",3,"difference","ns4:condin vivo",73.81594,10.29409,7.17071057276554,0,TRUE
+"sternoclavicular","horizontal flexion",3,"reference","intercept",9.17417,4.23614,2.16569093561591,0.03034,TRUE
+"sternoclavicular","horizontal flexion",3,"reference","ns1",-10.00646,2.84455,-3.51776555166898,0.00044,TRUE
+"sternoclavicular","horizontal flexion",3,"reference","ns2",-4.77594,2.29524,-2.08080200763319,0.03745,TRUE
+"sternoclavicular","horizontal flexion",3,"reference","ns3",-20.44053,6.10967,-3.3456029540057,0.00082,TRUE
+"sternoclavicular","horizontal flexion",3,"reference","ns4",-11.21359,4.76564,-2.35300820036763,0.01862,TRUE
+"acromioclavicular","horizontal flexion",3,"reference","intercept",19.95677,1.77565,11.2391349646608,0,TRUE
+"acromioclavicular","horizontal flexion",3,"reference","ns1",-9.84881,1.55686,-6.32607299307581,0,TRUE
+"acromioclavicular","horizontal flexion",3,"reference","ns2",-7.72897,1.21051,-6.38488736152531,0,TRUE
+"acromioclavicular","horizontal flexion",3,"reference","ns3",-16.85867,2.98178,-5.6538946535291,0,TRUE
+"acromioclavicular","horizontal flexion",3,"reference","ns4",-3.52749,1.46113,-2.41422050057148,0.01577,TRUE
+"scapulothoracic","horizontal flexion",3,"reference","intercept",3.25892,2.25644,1.44427505273794,0.14866,FALSE
+"scapulothoracic","horizontal flexion",3,"reference","ns1",-6.92452,1.32418,-5.22928906946186,0,TRUE
+"scapulothoracic","horizontal flexion",3,"reference","ns2",-5.92743,1.56489,-3.78776144010122,0.00015,TRUE
+"scapulothoracic","horizontal flexion",3,"reference","ns3",-19.25968,3.4134,-5.64237417237945,0,TRUE
+"scapulothoracic","horizontal flexion",3,"reference","ns4",-16.15624,6.32292,-2.55518652774351,0.01061,TRUE
+"scapulothoracic","horizontal flexion",3,"difference","condin vivo",-14.43311,3.4106,-4.23183897261479,2e-05,TRUE
+"scapulothoracic","horizontal flexion",3,"difference","ns1:condin vivo",2.94068,2.00094,1.46964926484552,0.14166,FALSE
+"scapulothoracic","horizontal flexion",3,"difference","ns2:condin vivo",-1.98049,2.36581,-0.837129777961882,0.40252,FALSE
+"scapulothoracic","horizontal flexion",3,"difference","ns3:condin vivo",8.13788,5.14903,1.58046855427139,0.114,FALSE
+"scapulothoracic","horizontal flexion",3,"difference","ns4:condin vivo",6.60893,9.53735,0.692952444861518,0.48834,FALSE
+"glenohumeral","horizontal flexion",3,"reference","intercept",-19.60919,3.51307,-5.58178174644969,0,TRUE
+"glenohumeral","horizontal flexion",3,"reference","ns1",17.35257,2.77103,6.26213718364651,0,TRUE
+"glenohumeral","horizontal flexion",3,"reference","ns2",21.43765,3.82979,5.5976045683967,0,TRUE
+"glenohumeral","horizontal flexion",3,"reference","ns3",45.87919,6.39214,7.17743822882478,0,TRUE
+"glenohumeral","horizontal flexion",3,"reference","ns4",36.39772,4.17437,8.71933249807755,0,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",3,"reference","intercept",1.71165,2.57868,0.663769835729908,0.50684,FALSE
+"sternoclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns1",-5.70457,1.41537,-4.03044433610999,6e-05,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns2",-4.79487,1.09626,-4.37384379617974,1e-05,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns3",-8.94106,3.6787,-2.43049446815451,0.01508,TRUE
+"sternoclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns4",-6.70821,2.33779,-2.86946646191489,0.00411,TRUE
+"acromioclavicular","internal-external rotation 0 degree-abducted",3,"reference","intercept",3.3473,2.16048,1.54933163000815,0.1213,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns1",2.92177,1.83277,1.59418257610066,0.11089,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns2",2.35567,1.66617,1.41382331934917,0.15741,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns3",-17.4112,20.91056,-0.832651062429701,0.40504,FALSE
+"acromioclavicular","internal-external rotation 0 degree-abducted",3,"reference","ns4",-40.6322,35.643,-1.13997699408018,0.2543,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"reference","intercept",-8.00734,2.51231,-3.18724202029208,0.00144,TRUE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"reference","ns1",2.39127,1.82669,1.3090726943269,0.19051,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"reference","ns2",2.22711,2.69635,0.825972147532776,0.40882,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"reference","ns3",3.48267,5.93481,0.586820808079787,0.55732,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"reference","ns4",-3.86453,6.19805,-0.623507393454393,0.53295,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"difference","condin vivo",-3.05558,2.95091,-1.03547041421121,0.30045,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"difference","ns1:condin vivo",-2.51828,2.06938,-1.21692487604983,0.22363,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"difference","ns2:condin vivo",-5.96969,3.29962,-1.80920530242876,0.07042,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"difference","ns3:condin vivo",-6.9339,7.09505,-0.97728698176898,0.32843,FALSE
+"scapulothoracic","internal-external rotation 0 degree-abducted",3,"difference","ns4:condin vivo",0.18277,6.28464,0.0290820158354337,0.9768,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"reference","intercept",-113.39701,31.11572,-3.64436400636077,0.00027,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"reference","ns1",120.32858,31.42052,3.82961771479275,0.00013,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"reference","ns2",140.80239,47.95298,2.93625943580566,0.00332,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"reference","ns3",252.75394,61.17172,4.13187564449716,4e-05,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"reference","ns4",147.29297,66.85983,2.20301143451905,0.02759,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"difference","condin vivo",76.27804,36.14899,2.11010155470457,0.03485,TRUE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"difference","ns1:condin vivo",-3.8995,36.49058,-0.106863195926182,0.9149,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"difference","ns2:condin vivo",21.00673,58.82395,0.357111856650225,0.72101,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"difference","ns3:condin vivo",13.95733,71.59929,0.19493670956793,0.84544,FALSE
+"glenohumeral","internal-external rotation 0 degree-abducted",3,"difference","ns4:condin vivo",27.35313,83.61689,0.327124460141964,0.74357,FALSE
+"scapulothoracic","internal-external rotation 90 degree-abducted",3,"reference","intercept",-4.6306,1.5594,-2.96947543927152,0.00298,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",3,"reference","ns1",2.33462,0.67016,3.48367554016951,0.00049,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",3,"reference","ns2",4.56578,0.67226,6.79168773986255,0,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",3,"reference","ns3",15.69282,1.3174,11.9119629573402,0,TRUE
+"scapulothoracic","internal-external rotation 90 degree-abducted",3,"reference","ns4",21.58211,1.6925,12.7516159527326,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",3,"reference","intercept",-58.29239,2.30806,-25.256011542161,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",3,"reference","ns1",84.29143,1.2384,68.0647852067184,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",3,"reference","ns2",102.99058,1.64477,62.6170102810727,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",3,"reference","ns3",164.36923,3.02028,54.4218516164064,0,TRUE
+"glenohumeral","internal-external rotation 90 degree-abducted",3,"reference","ns4",103.15816,3.27191,31.528422236553,0,TRUE
