@@ -37,6 +37,19 @@ vignettes/*.pdf
 # The /cache/ rule above is root-anchored and does NOT match this path.
 figures/generalized_v2/cache/
 
+# Per-shard console logs from the v3 sweep (.v3_s1_0.log, .v3_poc.log, ...)
+.v3_*.log
+
+# Fit cache for the v3 sweep — one RDS per cell per step, plus the assembled
+# v3_fit.rds the figures read. Derived from spartacus_angles_long.csv, which is
+# itself untracked; rebuild with the three analyze_all_v3_step*.R scripts.
+figures/generalized_v3/cache/
+
+# Same for v4. K_selection.csv is deliberately NOT ignored: it holds the manual
+# K decisions and must be versioned.
+.v4_*.log
+figures/generalized_v4/cache/
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md

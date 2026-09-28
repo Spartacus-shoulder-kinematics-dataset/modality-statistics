@@ -147,8 +147,10 @@ python3 prepare_monolix_data.py     # raw CSV -> the two derived long CSVs
 Rscript analysis_shoulder.R         # worked example -> figures/00_, 01_, 02_
 Rscript analysis_hlme.R             # iteration 03   -> figures/03_  (needs lcmm, ~95 s)
 Rscript analysis_random_spline.R    # iteration 04   -> figures/04_  (random curve, ~12 min)
+Rscript analysis_lrt.R              # iteration 06   -> figures/06_  (BIC + LRT, ~15 min)
 Rscript analyze_all.R               # 72-cell sweep -> figures/generalized/  (long-running)
 Rscript analyze_all_v2.R            # 72-cell sweep -> figures/generalized_v2/ (~12 min)
+Rscript analyze_all_v3.R            # 72-cell sweep -> figures/generalized_v3/ (hours)
 Rscript review_response_analysis.R  # reviewer-response evidence, console output only
 ```
 
@@ -167,6 +169,23 @@ The fit stores everything the figures need in `figures/generalized_v2/cache/v2_f
 which is **untracked** — a fresh clone needs the raw data and one fit run before any v2
 figure can be rebuilt. Constants shared by both halves live in `analyze_all_v2_common.R`;
 change them there and the figure script will warn you that the cache is stale.
+
+`analyze_all_v3.R` is the same idea taken further: it applies iteration 06's inference to
+every cell — the spline df chosen **per cell** by BIC over K = 1…20, a likelihood-ratio
+test instead of Wald, and Bonferroni across the whole plate. Because step 1 fits twenty
+models per cell it is split by step, and the long one is shardable across processes:
+
+```bash
+for s in 0 1 2 3 4; do V3_NSHARD=5 V3_SHARD=$s V3_NPROC=4 Rscript analyze_all_v3_step1.R & done; wait
+for s in 0 1 2 3 4; do V3_NSHARD=5 V3_SHARD=$s V3_NPROC=4 Rscript analyze_all_v3_step2.R & done; wait
+Rscript analyze_all_v3_step3.R      # the LRT, Bonferroni, and the master CSVs
+Rscript analyze_all_v3_figures.R    # seconds — per-cell figures and every plate
+```
+
+Each step caches **one RDS per cell** under `figures/generalized_v3/cache/` as that cell
+finishes, so a killed run resumes rather than restarts, and each step reads only the step
+before it. `V3_ONLY='<joint>|<motion>|<dof>'` runs a single cell. See
+[`figures/generalized_v3/README.md`](figures/generalized_v3/README.md) for the method.
 
 The scripts create their own `figures/` subdirectories, but they do **not** regenerate the
 hand-written [`figures/README.md`](figures/README.md) — keep that file if you ever
@@ -295,7 +314,10 @@ latent growth curve modelling was rejected — is in
 | [`analysis_shoulder.R`](analysis_shoulder.R) | the pedagogical worked example: exploration → sigmoid NLME (rejected) → spline mixed model + AR(1) → difference curve → coefficient export | `monolix_st_frontal_dof2.csv` | `figures/00_data_exploration/`, `figures/01_sigmoid_nlme/`, `figures/02_spline_mixed_model/` (figures, `00_results_summary.txt`, `00_coefficients.csv`, `00_variance_components.csv`) |
 | [`analysis_hlme.R`](analysis_hlme.R) | iteration 03: natural spline + `lcmm::hlme`, 12 parameters instead of 64, with a Wald test per coefficient and a residual-normality check | `monolix_st_frontal_dof2.csv` | `figures/03_natural_spline_hlme/` (figures, `00_coefficients.csv`, `00_wald_tests.csv`, `00_model_selection.csv`, `00_thinning.csv`) |
 | [`analysis_random_spline.R`](analysis_random_spline.R) | iteration 04: a random *curve* per shoulder (the whole spline basis in the random effects), with explicit knots; compares three random-effect structures | `monolix_st_frontal_dof2.csv` | `figures/04_natural_spline_hlme/` (figures, `00_variants.csv`, `00_coefficients.csv`, `00_wald_tests.csv`) |
+| [`analysis_lrt.R`](analysis_lrt.R) | iteration 06: Mélanie Prague's plan — the spline df by BIC on the *reduced* model over K = 1…20, an individual-fit check, then a **likelihood-ratio test**. No Wald tests | `monolix_st_frontal_dof2.csv` | `figures/06_natural_spline_hlme/` (figures, `00_bic_by_k.csv`, `00_lrt.csv`, `00_individual_fit.csv`) |
 | [`analyze_all.R`](analyze_all.R) | the same model over all 72 joint × movement × DoF cells, plus one plate per movement and FDR adjustment | `spartacus_angles_long.csv` | `figures/generalized/` (plates, per-cell drill-downs, `00_master_summary.csv`, `00_SUMMARY.md`) |
+| [`analyze_all_v2.R`](analyze_all_v2.R) → `_common` / `_fit` / `_figures` | v2 sweep: iteration 04's model on all 72 cells at a fixed `ns(df = 4)`, joint Wald χ² and BH-FDR. Fitting and drawing are separate, over an RDS cache | `spartacus_angles_long.csv` | `figures/generalized_v2/` (plates, forest, significance maps, `00_master_summary.csv`, `00_wald_tests.csv`) |
+| [`analyze_all_v3.R`](analyze_all_v3.R) → `_common` / `_step1` / `_step2` / `_step3` / `_figures` | v3 sweep: iteration 06's inference on all 72 cells — **df chosen per cell** by BIC over K = 1…20, likelihood-ratio test, **Bonferroni** across the plate, no Wald. Split by step, cached per cell, shardable | `spartacus_angles_long.csv` | `figures/generalized_v3/` (a figure folder per cell, plates, `00_k_map`, `00_master_summary.csv`, `00_bic_by_k.csv`) |
 | [`review_response_analysis.R`](review_response_analysis.R) | evidence for the reviewer response: study random effect, corrected ρ, signed effect size, leave-one-study-out | `spartacus_angles_long.csv` | console only |
 
 ### Retired / scratch — not part of the pipeline
@@ -317,6 +339,8 @@ latent growth curve modelling was rejected — is in
 | --- | --- |
 | [`figures/README.md`](figures/README.md) | the figure-by-figure narrative — what each iteration set shows and why the model moved on |
 | [`figures/generalized/00_SUMMARY.md`](figures/generalized/00_SUMMARY.md) | generated index of the sweep: 33 compared / 30 single-condition / 9 skipped cells, sorted by effect size |
+| [`figures/06_natural_spline_hlme/README.md`](figures/06_natural_spline_hlme/README.md) | iteration 06 — why the Wald battery was dropped for a likelihood-ratio test, and how K is chosen |
+| [`figures/generalized_v3/README.md`](figures/generalized_v3/README.md) | the v3 method: per-cell df by BIC, the LRT, Bonferroni, and the caching/sharding model |
 
 ---
 
