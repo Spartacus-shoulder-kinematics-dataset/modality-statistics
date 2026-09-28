@@ -1,0 +1,75 @@
+Iteration 06 — BIC on the reduced model, then a likelihood-ratio test
+=====================================================================
+
+Reference condition: in vivo.  The departure term is ex vivo.
+The difference curve is EX VIVO minus IN VIVO — mirrored vs iterations 03-05.
+
+Data: 22102 obs -> 3378 after thinning to <=100/shoulder and trimming to the overlap; 44 shoulders; x in 14.0..150.0
+
+STEP 1 — BIC over the reduced model (no condition terms):
+    K n_fixed n_random converged    loglik     BIC rmse_max rmse_median
+1   1       2        2      TRUE -4695.140 9407.45 4.249177   1.0559086
+2   2       3        3      TRUE -3128.092 6280.22 1.517682   0.5915631
+3   3       4        4      TRUE -2145.646 4322.20 1.107011   0.3595634
+4   4       5        5      TRUE -1642.451 3322.68 0.967464   0.2896656
+5   5       6        6      TRUE -1187.138 2418.92 0.774916   0.2219381
+6   6       7        7      TRUE -1046.476 2144.46 0.705192   0.1659071
+7   7       8        8      TRUE  -906.312 1871.00 0.650965   0.1499290
+8   8       9        9      TRUE  -822.214 1709.67 0.617425   0.1458181
+9   9      10       10      TRUE  -753.044 1578.20 0.602727   0.1373230
+10 10      11       11      TRUE  -728.290 1535.56 0.604756   0.1227213
+11 11      12       12      TRUE  -767.753 1621.36 0.610088   0.1158101
+12 12      13       13      TRUE  -803.284 1699.29 0.610141   0.1136879
+13 13      14       14      TRUE  -851.509 1802.60 0.603249   0.1086902
+14 14      15       15      TRUE  -916.764 1939.98 0.595535   0.1065379
+15 15      16       16      TRUE  -927.626 1968.57 0.585681   0.1030817
+16 16      17       17      TRUE  -936.576 1993.34 0.570098   0.0864785
+17 17      18       18      TRUE  -932.053 1991.16 0.548381   0.0851326
+18 18      19       19      TRUE  -916.695 1967.31 0.513325   0.0812358
+19 19      20       20      TRUE  -908.680 1958.15 0.480434   0.0834532
+20 20      21       21      TRUE  -899.601 1946.86 0.451587   0.0749855
+   rmse_ratio    r2_ss  r2_marg  seconds
+1     4.02419 0.988005 0.794981  6.36134
+2     2.56555 0.997327 0.795196 12.85424
+3     3.07876 0.998997 0.795873 16.62109
+4     3.33993 0.999425 0.795757 21.85423
+5     3.49159 0.999658 0.795761 16.36112
+6     4.25052 0.999728 0.795529 18.42556
+7     4.34182 0.999784 0.795667 19.50082
+8     4.23422 0.999821 0.795861 20.53722
+9     4.38912 0.999850 0.795673 19.82852
+10    4.92788 0.999869 0.795854 27.52476
+11    5.26801 0.999878 0.796031 28.60198
+12    5.36681 0.999887 0.796012 32.21831
+13    5.55017 0.999893 0.796178 33.16638
+14    5.58989 0.999892 0.796314 40.43593
+15    5.68172 0.999896 0.796495 41.88519
+16    6.59237 0.999902 0.796784 43.26874
+17    6.44150 0.999911 0.796922 82.20758
+18    6.31895 0.999920 0.796763 65.83090
+19    5.75692 0.999928 0.796577 64.77671
+20    6.02233 0.999936 0.796434 77.38931
+
+  K = 10 — BIC minimum, next best 43 higher
+
+STEP 1a — individual fit at that K:
+  worst shoulder / median RMSE = 4.93
+  flagged (robust z > 3): 1 of 31
+  concordance R2: marginal 0.796, subject-specific 1.000 (gap 0.204)
+
+  The gap is what the random curves buy: the marginal prediction uses the
+  population curve alone, the subject-specific one adds each shoulder's BLUP.
+
+STEP 3 — likelihood-ratio test (H0 = no ex-vivo departure):
+  loglik reduced -726.66 | full -674.21
+  LR = 104.90, df = 11, p = 1.9013e-17  ->  reject H0
+
+STEP 4 — no Wald tests. The reporting object is 03_difference.png.
+  mean |ex vivo - in vivo| = 10.11 deg over 14..150 deg
+
+RESIDUALS:
+  skew 0.210 | excess kurtosis 12.696 | Shapiro p 2.66e-48 (subsampled)
+
+CAVEAT: condition is perfectly confounded with source study - descriptive, not causal.
+No multiple-comparison adjustment here: one cell, one test. Bonferroni across the
+plate belongs to the generalized rewrite.
