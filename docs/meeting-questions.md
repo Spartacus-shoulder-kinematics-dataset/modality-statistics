@@ -80,4 +80,6 @@ J'avais un pb de convergence. pour Dof 1 plan frontal AC.
 
 ça risque de pas conbverger pour l'overfitting à cause de RDM relative distance to maximum. dans une vallée plate, ça peut pas converger !
 
-Si c'est toujours catastrophe on peut ajouter un departure, quadratique maximum. gamma0, gamma1 et gamma 2. et interpreter cette difference.
+-> Si c'est toujours catastrophe on peut ajouter un departure, quadratique maximum. gamma0, gamma1 et gamma 2. et interpreter cette difference.
+
+

@@ -47,18 +47,7 @@ AC acromioclaviculaire · GH glénohuméral · ST scapulothoracique · SC sterno
 Effectifs en épaules in vivo / ex vivo (identiques pour les 3 DoF). Comparée si ≥ 3 épaules dans chaque condition ; écartée si < 4 épaules au total.
 
 
-For ex
-
-
-
-
-F
-
-
-
-
-
-fzzdzdzdzzzzzzzzzzzzzzzzzzzzzzdzdzdzdzdzddzeeeeee                       
+For ex       
 
 ⚠ AC frontal apparaît deux fois dans les notes : une fois OBS2, une fois « tout est ok » (à préciser).
 
