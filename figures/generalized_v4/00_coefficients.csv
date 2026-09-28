@@ -1,0 +1,48 @@
+"joint","motion","dof","K","model","parameter","estimate","se"
+"scapulothoracic","frontal plane elevation",2,8,"full","intercept",-7.47967440978505,1.26936318861783
+"scapulothoracic","frontal plane elevation",2,8,"full","ns1",-10.6197973106194,0.614165036803657
+"scapulothoracic","frontal plane elevation",2,8,"full","ns2",-16.3536238993594,0.762737296932051
+"scapulothoracic","frontal plane elevation",2,8,"full","ns3",-22.263899482127,0.805903973179257
+"scapulothoracic","frontal plane elevation",2,8,"full","ns4",-27.2139596935897,0.950165268162295
+"scapulothoracic","frontal plane elevation",2,8,"full","ns5",-32.6192124726129,1.10745910677178
+"scapulothoracic","frontal plane elevation",2,8,"full","ns6",-35.7812635662308,1.37180260944478
+"scapulothoracic","frontal plane elevation",2,8,"full","ns7",-43.4650527743925,1.39413794629813
+"scapulothoracic","frontal plane elevation",2,8,"full","ns8",-39.9179284967193,1.91764266189763
+"scapulothoracic","frontal plane elevation",2,8,"full","condex vivo",5.36643571027098,2.37536556776469
+"scapulothoracic","frontal plane elevation",2,8,"full","ns1:condex vivo",6.61499102033079,1.20467612861754
+"scapulothoracic","frontal plane elevation",2,8,"full","ns2:condex vivo",10.4796291261491,1.47208482615589
+"scapulothoracic","frontal plane elevation",2,8,"full","ns3:condex vivo",12.3750707838258,1.54346931724724
+"scapulothoracic","frontal plane elevation",2,8,"full","ns4:condex vivo",8.30644260335494,1.80214689200813
+"scapulothoracic","frontal plane elevation",2,8,"full","ns5:condex vivo",3.31871631968858,2.08293356666059
+"scapulothoracic","frontal plane elevation",2,8,"full","ns6:condex vivo",-6.01104059722812,2.52586376920115
+"scapulothoracic","frontal plane elevation",2,8,"full","ns7:condex vivo",-12.5026697718386,3.56865144279781
+"scapulothoracic","frontal plane elevation",2,8,"full","ns8:condex vivo",-20.7735081099848,5.10439544193628
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 1",49.755307443404,0.761674845140771
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 2",11.5158264936986,0.378222626553
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 3",17.7736150203906,0.461723051052492
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 4",19.9176165456263,0.486953426323451
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 5",27.7486753086725,0.576101497287792
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 6",37.7922463314702,0.668258611268866
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 7",56.4539756235101,0.832195902936591
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 8",56.8039052483692,0.940976154230242
+"scapulothoracic","frontal plane elevation",2,8,"full","varcov 9",107.146413094849,1.33401480105995
+"scapulothoracic","frontal plane elevation",2,8,"full","stderr",0.212735584969856,0.00277368200017041
+"scapulothoracic","frontal plane elevation",2,8,"reduced","intercept",-5.50678054541471,1.17739313682527
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns1",-9.03859929020636,0.664055561842596
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns2",-13.6544848289204,0.914686253572914
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns3",-18.9860646836073,1.04691757868292
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns4",-25.158924108135,0.955469788961473
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns5",-32.0014386189466,0.973230541909578
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns6",-37.9285889489572,1.26411051089629
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns7",-45.4495555979258,1.40087367045345
+"scapulothoracic","frontal plane elevation",2,8,"reduced","ns8",-42.3597820113925,1.89085158048871
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 1",60.0302024702751,0.840516842601418
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 2",18.5074689677405,0.476008357282202
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 3",35.7414150923855,0.658433536644854
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 4",47.2546174504674,0.74857439129039
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 5",39.1426455841956,0.687172828051043
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 6",40.6793364968213,0.697312800603383
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 7",68.150502604879,0.920649515196381
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 8",70.7098140272394,1.12185159492276
+"scapulothoracic","frontal plane elevation",2,8,"reduced","varcov 9",124.792557871293,1.59290097408308
+"scapulothoracic","frontal plane elevation",2,8,"reduced","stderr",-0.213070317556628,0.00279045366372341
